@@ -1,0 +1,66 @@
+getwd()  # Directorio de trabajo actual
+
+list.files("data_raw/datos_sesion_02_blast")
+
+file.exists("data_raw/datos_sesion_02_blast/resultados_blast.tsv")
+
+file.info("data_raw/datos_sesion_02_blast/resultados_blast.tsv")
+
+archivo_blast <- "data_raw/datos_sesion_02_blast/resultados_blast.tsv"
+file.exists(archivo_blast)
+
+readLines(archivo_blast, n = 5)
+
+archivo_blast <- "data_raw/datos_sesion_02_blast/resultados_blast.tsv"
+file.exists(archivo_blast)
+
+
+install.packages("readr")
+library(readr)
+blast <- readr::read_tsv("dataraw/datos_sesion_02_blast")
+
+
+sort(table(blast$query_id), decreasing = TRUE)
+
+
+# Esto abrirá una ventana para que busques y selecciones tu archivo .tsv
+blast_data <- read.delim("C:~/Documents/Intro_aR/datos_sesion_02_blast")
+# Ejecuta esto y selecciona tu archivo 'resultados_blast.tsv' en la ventana que aparezca
+blast_data <- read.delim(file.choose(), header = FALSE, col.names = col_names, stringsAsFactors = FALSE)
+
+# 1. Cargar la tabla (asume que no tiene encabezados; si los tiene, cambia header = TRUE)
+# Columnas típicas de BLAST outfmt 6: qseqid, sseqid, pident, length, mismatch, gapopen, qstart, qend, sstart, send, evalue, bitscore
+col_names <- c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", 
+               "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+
+blast_data <- read.delim("resultados_blast.tsv", header = FALSE, col.names = col_names, stringsAsFactors = FALSE)
+
+# 2. ¿Cuántos registros (filas) y columnas tiene la tabla?
+dim(blast_data) 
+# Devuelve: c(número_de_filas, número_de_columnas)
+# O de forma explícita:
+cat("Filas:", nrow(blast_data), "\n")
+cat("Columnas:", ncol(blast_data), "\n")
+
+# 3. ¿Cuántos query_id diferentes aparecen?
+n_distinct(blast_data$qseqid) # (Requiere library(dplyr))
+# O en R base:
+length(unique(blast_data$qseqid))
+
+# 4. ¿Cuántos resultados tiene cada consulta (query_id)?
+table(blast_data$qseqid)
+# O con dplyr para una vista ordenada en tibble:
+library(dplyr)
+conteo_por_query <- blast_data %>% 
+  count(qseqid, name = "num_resultados")
+print(conteo_por_query)
+
+# 5. ¿Qué filas tienen pident mayor o igual a 95?
+filas_pident_95 <- blast_data %>% filter(pident >= 95)
+print(filas_pident_95)
+
+# 6. ¿Hay valores faltantes? (NA / celdas vacías)
+any(is.na(blast_data))
+# Para ver cuántos valores faltantes hay por columna:
+colSums(is.na(blast_data))
+

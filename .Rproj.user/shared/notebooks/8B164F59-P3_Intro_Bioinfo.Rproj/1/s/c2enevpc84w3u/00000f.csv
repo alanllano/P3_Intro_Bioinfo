@@ -1,0 +1,10 @@
+"0","readr::spec(blast)"
+"1","cols(
+  query_id = [31mcol_character()[39m,
+  subject_id = [31mcol_character()[39m,
+  pident = [32mcol_double()[39m,
+  length = [32mcol_double()[39m,
+  evalue = [32mcol_double()[39m,
+  bitscore = [32mcol_double()[39m
+)
+"

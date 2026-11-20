@@ -1,0 +1,7 @@
+"0","anotaciones <- data.frame("
+"0","  gen = c(""g1"", ""g2"", ""g3""),"
+"0","  longitud = c(450, 120, 800),"
+"0","  producto = c(""transportador"", ""hipotetica"", ""enzima"")"
+"0",")"
+"0",""
+"0","anotaciones"

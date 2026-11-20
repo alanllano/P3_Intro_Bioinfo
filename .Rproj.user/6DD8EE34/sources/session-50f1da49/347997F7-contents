@@ -1,0 +1,131 @@
+---
+title: "Apuntes_Intro_R_Bioinfo_P3"
+format: pdf
+editor: visual
+---
+
+# Apuntes Intro. a R
+
+### **¿Por qué utilizar R?**
+
+Es ampliamente utilizado para la *computación estadística, gráfica, y de machine learning*. Ofrece una amplia variedad de **funciones estadísticas** (modelos lineales y no lineales, pruebas estadísticas clásicas, análisis de series de tiempo, clasificación, agrupamiento, etc.), y para realizar gráficas.
+
+## Crear un R Project
+
+Al comenzar a trabajar con R y RStudio, ya sea para crear un programa para un proyecto, crear una aplicación, presentación, blog, paquete, etc, es recomendable crear un **R project**
+
+### **¿Qué es un R Project y por qué usarlo?**
+
+- **Carpeta de trabajo dedicada**: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.
+
+- **Organización**: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.
+
+- **Reproducibilidad**: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.
+
+- **Integración con Git/GitHub**: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.
+
+### **¿Cómo iniciamos un R project?**
+
+1.  Vayamos en la parte superior al menú **Archivos \> Nuevo Proyecto**.
+2.  Seleccionamos la opción de **Nuevo directorio**.
+3.  Seleccionamos el tipo de projecto que vamos a iniciar, en nuestro caso **Nuevo proyecto**.
+4.  Nombramos el folder que crearemos y seleccionamos en dónde queremos que se almacene.
+
+Si vamos al folder en donde creamos nuestro proyecto, podemos observar que se creó un archivo con terminación **Rproj**, este es un archivo que contiene la configuración específica para nuestro proyecto.
+
+### Directorio de trabajo
+
+Este archivo (**Rproj**) también establece como **directorio de trabajo** el folder en donde iniciamos el proyecto (puedes comprobarlo desde la consola de RStudio, escribiendo el comando `getwd()`).
+
+```{r}
+getwd()
+```
+
+------------------------------------------------------------------------
+
+## Crear un Rscript
+
+Para comenzar a trabajar en un proyecto, necesitamos crear un archivo para escribir nuestro programa. Entra en **Archivo \> Nuevo Archivo**.
+
+Podemos ver que tenemos distintas opciones de archivos que podemos crear, en este caso vamos a crear nuestro primer **Rscript**.
+
+### **¿Qué es un Rscript?**
+
+Es simplemente un archivo de texto con las instrucciones de nuestro algoritmo escritas en el lenguaje de R. También contiene nuestros comentarios escritos con `#`.
+
+Intenta escribir tu primer Rscript en el **editor**, copiando el siguiente algoritmo para realizar una suma:
+
+```{r}
+a <- 2
+b <- 3
+suma <- a + b
+suma
+```
+
+```{r}
+c <-6
+d <- 5
+resta <- c-d
+resta
+```
+
+```{r}
+x <- 6
+y <- 2
+cuadrados <- (x)^2-y
+cuadrados
+```
+
+## Descargar y cargar Librerías
+
+### ¿Qué es una librería?
+
+En programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.
+
+### Instalar librerías: CRAN
+
+1.  Instalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de esta forma:
+
+```{r}
+#install.packages("tidyverse")
+
+#remove.packages("tidyverse")
+
+#rownames(installed.packages()) Devuelve los nombres de todos los paquetes instalados.
+
+#View(installed.packages()) Abrirá una pestaña interactiva donde podrás ver el nombre, la ruta de instalación y la versión exacta de cada paquete
+
+#requireNamespace("nombre_del_paquete", quietly = TRUE). Devuelve TRUE si el paquete está instalado y FALSE si no lo está, sin afectar tu entorno.
+```
+
+## Las partes de RStudio
+
+Al abrir RStudio Desktop encontrarás normalmente cuatro áreas:
+
+- **Source (editor):** permite escribir y guardar scripts `.R` y documentos `.qmd`.
+
+- **Console:** ejecuta instrucciones de R y muestra sus resultados o errores.
+
+- **Environment/History:** muestra objetos creados durante la sesión y comandos anteriores.
+
+- **Files/Plots/Packages/Help:** permite navegar archivos, ver gráficos, gestionar paquetes y consultar documentación.
+
+Los paneles pueden cambiar de posición desde **Tools \> Global Options \> Pane Layout**. Para modificar el tema visual, utiliza **Tools \> Global Options \> Appearance**.
+
+------------------------------------------------------------------------
+
+### **¿Qué es un R Project y por qué usarlo?**
+
+- **Carpeta de trabajo dedicada**: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.
+
+- **Organización**: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.
+
+- **Reproducibilidad**: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.
+
+- **Integración con Git/GitHub**: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.
+
+Práctica:
+
+```{r}
+
+```

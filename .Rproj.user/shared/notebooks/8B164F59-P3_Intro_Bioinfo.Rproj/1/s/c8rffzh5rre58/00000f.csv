@@ -1,0 +1,7 @@
+"0","conteos <- c(0, 12, 4, 0, 25)"
+"0",""
+"0","all(conteos >= 0)  # ¿Todos los conteos son no negativos?"
+"1","[1]"
+"1"," TRUE"
+"1","
+"

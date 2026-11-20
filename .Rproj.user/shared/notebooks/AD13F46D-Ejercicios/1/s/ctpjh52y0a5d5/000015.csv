@@ -1,0 +1,6 @@
+"0",""
+"0","# Contar cuántos genes hay por categoría y ordenar de mayor a menor"
+"0","resumen_funciones <- top15_genes %>%"
+"0","  count(funcion, sort = TRUE)"
+"0",""
+"0","resumen_funciones"

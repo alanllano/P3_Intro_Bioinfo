@@ -1,0 +1,7 @@
+"0","blast_con_comentarios <- readr::read_tsv("
+"0","  ""data_raw/datos_sesion_02_blast/blast_comentarios.tsv"","
+"0","  comment = ""#"","
+"0","  show_col_types = FALSE"
+"0",")"
+"0",""
+"0","head(blast_con_comentarios)"

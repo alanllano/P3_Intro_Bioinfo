@@ -1,0 +1,7 @@
+"0","ruta <- ""data_raw/datos_sesion_02_blast/blast_separador_incorrecto.csv"""
+"0","mal <- readr::read_csv(ruta, show_col_types = FALSE)"
+"0","names(mal)"
+"1","[1]"
+"1"," ""query_id\tsubject_id\tpident\tlength\tevalue\tbitscore"""
+"1","
+"

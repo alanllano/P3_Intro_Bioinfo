@@ -1,0 +1,1748 @@
+---
+title: "Apuntes_Introducción_R"
+author: "Alan Llano"
+format: pdf
+editor: visual
+---
+
+# Apuntes Intro. a R
+
+### **¿Por qué utilizar R?**
+
+Es ampliamente utilizado para la *computación estadística, gráfica, y de machine learning*. Ofrece una amplia variedad de **funciones estadísticas** (modelos lineales y no lineales, pruebas estadísticas clásicas, análisis de series de tiempo, clasificación, agrupamiento, etc.), y para realizar gráficas.
+
+## Crear un R Project
+
+Al comenzar a trabajar con R y RStudio, ya sea para crear un programa para un proyecto, crear una aplicación, presentación, blog, paquete, etc, es recomendable crear un **R project**
+
+### **¿Qué es un R Project y por qué usarlo?**
+
+- **Carpeta de trabajo dedicada**: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.
+
+- **Organización**: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.
+
+- **Reproducibilidad**: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.
+
+- **Integración con Git/GitHub**: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.
+
+### **¿Cómo iniciamos un R project?**
+
+1.  Vayamos en la parte superior al menú **Archivos \> Nuevo Proyecto**.
+2.  Seleccionamos la opción de **Nuevo directorio**.
+3.  Seleccionamos el tipo de projecto que vamos a iniciar, en nuestro caso **Nuevo proyecto**.
+4.  Nombramos el folder que crearemos y seleccionamos en dónde queremos que se almacene.
+
+Si vamos al folder en donde creamos nuestro proyecto, podemos observar que se creó un archivo con terminación **Rproj**, este es un archivo que contiene la configuración específica para nuestro proyecto.
+
+### Directorio de trabajo
+
+Este archivo (**Rproj**) también establece como **directorio de trabajo** el folder en donde iniciamos el proyecto (puedes comprobarlo desde la consola de RStudio, escribiendo el comando `getwd()`).
+
+```{r}
+getwd()
+```
+
+------------------------------------------------------------------------
+
+## Crear un Rscript
+
+Para comenzar a trabajar en un proyecto, necesitamos crear un archivo para escribir nuestro programa. Entra en **Archivo \> Nuevo Archivo**.
+
+Podemos ver que tenemos distintas opciones de archivos que podemos crear, en este caso vamos a crear nuestro primer **Rscript**.
+
+### **¿Qué es un Rscript?**
+
+Es simplemente un archivo de texto con las instrucciones de nuestro algoritmo escritas en el lenguaje de R. También contiene nuestros comentarios escritos con `#`.
+
+Intenta escribir tu primer Rscript en el **editor**, copiando el siguiente algoritmo para realizar una suma:
+
+```{r}
+a <- 2
+b <- 3
+suma <- a + b
+suma
+```
+
+```{r}
+c <-6
+d <- 5
+resta <- c-d
+resta
+```
+
+```{r}
+x <- 6
+y <- 2
+cuadrados <- (x)^2-y
+cuadrados
+```
+
+## Descargar y cargar Librerías
+
+### ¿Qué es una librería?
+
+En programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.
+
+### Instalar librerías: CRAN
+
+1.  Instalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de esta forma:
+
+```{r}
+install.packages("BiocManager") # Esto es necesario solo 1 vez
+
+
+#install.packages("tidyverse")
+
+#remove.packages("tidyverse")
+
+#rownames(installed.packages()) Devuelve los nombres de todos los paquetes instalados.
+
+#View(installed.packages()) Abrirá una pestaña interactiva donde podrás ver el nombre, la ruta de instalación y la versión exacta de cada paquete
+
+#requireNamespace("nombre_del_paquete", quietly = TRUE). Devuelve TRUE si el paquete está instalado y FALSE si no lo está, sin afectar tu entorno.
+```
+
+### ¿Qué es una librería?
+
+En programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.
+
+Como mencioné anteriormente, al descargar R, también descargamos una serie de librerías, llamadas **base R packages**. Sin embargo, dependiendo del problema que queramos resolver con nuestro programa, necesitaremos librerías que nos permitan hacer otras cosas.
+
+### Cargar paquetes en el ambiente de R
+
+```{r}
+#library(ggplot2)
+```
+
+**Actividad**
+
+Copia y pega el siguiente código en tu consola dentro de Rstudio:
+
+```{r}
+#install.packages("palmerpenguins")
+#install.packages("ggplot2")
+#install.packages("dplyr")
+#install.packages("DT")
+```
+
+## Las partes de RStudio
+
+Al abrir RStudio Desktop encontrarás normalmente cuatro áreas:
+
+- **Source (editor):** permite escribir y guardar scripts `.R` y documentos `.qmd`.
+
+- **Console:** ejecuta instrucciones de R y muestra sus resultados o errores.
+
+- **Environment/History:** muestra objetos creados durante la sesión y comandos anteriores.
+
+- **Files/Plots/Packages/Help:** permite navegar archivos, ver gráficos, gestionar paquetes y consultar documentación.
+
+Los paneles pueden cambiar de posición desde **Tools \> Global Options \> Pane Layout**. Para modificar el tema visual, utiliza **Tools \> Global Options \> Appearance**.
+
+------------------------------------------------------------------------
+
+### **¿Qué es un R Project y por qué usarlo?**
+
+- **Carpeta de trabajo dedicada**: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.
+
+- **Organización**: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.
+
+- **Reproducibilidad**: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.
+
+- **Integración con Git/GitHub**: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.
+
+### Verificar paquetes instalados y sus versiones
+
+```{r}
+"ggplot2" %in% rownames(installed.packages())
+packageVersion("ggplot2")
+#installed.packages()[, c("Package", "Version")]
+#help(package = "ggplot2")
+#?plot
+```
+
+La pestaña **Packages** de RStudio también muestra los paquetes instalados y sus versiones.
+
+### Actualizar paquetes
+
+En ocasiones, necesitamos instalar una **versión específica de un paquete** en lugar de la versión más reciente. Esto puede ser útil cuando queremos reproducir un análisis, seguir un tutorial o trabajar con código desarrollado con una versión anterior.
+
+Para hacerlo, podemos utilizar la función `install_version()` del paquete `remotes`.
+
+**Paso 1.** Instalar el paquete `remotes` (si aún no está instalado).
+
+```{r}
+#install.packages("remotes")
+```
+
+**Paso 2.** Instalar la versión deseada. Por ejemplo, para instalar la versión `1.1.4` de `dplyr`:
+
+```{r}
+#remotes::install_version(
+#  "dplyr",
+#  version = "1.1.4",
+#  repos = "https://cloud.r-project.org"
+# )
+```
+
+**Paso 3.** Verificar qué versión quedó instalada:
+
+```{r}
+packageVersion("dplyr")
+```
+
+**Actividad: comprobar que el entorno está listo**
+
+```{r}
+R.version.string
+Sys.info()[["sysname"]]
+
+#install.packages(c("ggplot2", "dplyr")) # Solo si faltan
+library(ggplot2)
+library(dplyr)
+packageVersion("ggplot2")
+packageVersion("dplyr")
+```
+
+------------------------------------------------------------------------
+
+## Asignación, nombres y tipos básicos
+
+Un **objeto** almacena un valor o una estructura que podremos reutilizar. Usaremos `<-` para asignar valores. Los nombres distinguen mayúsculas de minúsculas: `gen` y `Gen` son objetos distintos.
+
+| **Clases**  | **Declaración de la variable** | **Conversión de formato** |
+|:-----------:|:------------------------------:|:-------------------------:|
+|  `numeric`  |          `numeric()`           |      `as.numeric()`       |
+|  `integer`  |          `integer()`           |      `as.integer()`       |
+|  `double`   |           `double()`           |       `as.double()`       |
+| `character` |         `character()`          |     `as.character()`      |
+|  `logical`  |          `logical()`           |      `as.logical()`       |
+|  `factor`   |           `factor()`           |       `as.factor()`       |
+
+## Descripción de cada clase
+
+### 1. `numeric` (Numérico)
+
+Es la clase general para cualquier número real (con o sin decimales). En R, cuando escribes un número como `5` o `3.14`, por defecto se clasifica como `numeric`.
+
+- **`numeric(n)`:** Crea un vector de `n` ceros (ej. `numeric(3)` produce `0 0 0`).
+
+- **`as.numeric(x)`:** Convierte `x` en número. Por ejemplo, `as.numeric("25.5")` devuelve `25.5`, y `as.numeric(TRUE)` devuelve `1`.
+
+### 2. `integer` (Entero)
+
+Representa exclusivamente **números enteros** (sin parte decimal), como `-3`, `0` o `42`. Ocupan la mitad de memoria que los decimales. Para escribir un entero directamente en R se le añade una `L` al final (ej. `10L`).
+
+- **`integer(n)`:** Crea un vector de `n` ceros enteros (`0L`).
+
+- **`as.integer(x)`:** Convierte `x` a entero. Si el número tiene decimales, **trunca** (corta) la parte decimal sin redondear: `as.integer(3.9)` devuelve `3`.
+
+### 3. `double` (Decimal de doble precisión)
+
+Es el formato interno en el que R almacena los números con decimales (punto flotante de 64 bits). En la práctica, **`numeric` y `double` son casi sinónimos en R**: `numeric` es el nombre de la clase general y `double` es el tipo específico de almacenamiento en memoria.
+
+- **`double(n)`:** Igual que `numeric(n)`, crea un vector de `n` ceros con precisión decimal.
+
+- **`as.double(x)`:** Convierte `x` a número de doble precisión; funciona de forma idéntica a `as.numeric(x)`.
+
+### 4. `character` (Carácter / Texto)
+
+Almacena cadenas de texto (*strings*), siempre rodeadas por comillas simples `' '` o dobles `" "`. Cualquier dato entre comillas —incluso `"123"`— es texto, no un número, por lo que no puedes hacer operaciones matemáticas con él.
+
+- **`character(n)`:** Crea un vector de `n` cadenas de texto vacías (`""`).
+
+- **`as.character(x)`:** Convierte cualquier valor a texto. Por ejemplo, `as.character(100)` devuelve `"100"`.
+
+### 5. `logical` (Lógico / Booleano)
+
+Solo admite dos valores de verdad: **`TRUE`** (verdadero) o **`FALSE`** (falso), además de `NA` si el dato falta. Se usa para condiciones, filtros y comparaciones (`5 > 3` devuelve `TRUE`).
+
+- **`logical(n)`:** Crea un vector de `n` valores `FALSE`.
+
+- **`as.logical(x)`:** Convierte a booleano. En números, `0` se vuelve `FALSE` y cualquier otro número se vuelve `TRUE`. En texto, `"TRUE"`, `"T"`, `"FALSE"` y `"F"` se convierten a su equivalente lógico; cualquier otro texto devuelve `NA`.
+
+### 6. `factor` (Factor / Variable categórica)
+
+Almacena **datos categóricos** con un conjunto finito y conocido de valores posibles llamados **niveles (*levels*)**, como `"bajo"`, `"medio"`, `"alto"` o `"norte"`, `"sur"`. Es clave para modelos estadísticos y gráficas porque permite definir un orden específico en las categorías.
+
+- **`factor(x)`:** A diferencia de los anteriores, no recibe una longitud para crear ceros; recibe un vector de datos y lo convierte en categorías detectando sus niveles únicos (ej. `factor(c("rojo", "azul", "rojo"))` crea dos niveles: `"azul"` y `"rojo"`).
+
+- **`as.factor(x)`:** Convierte un vector existente (normalmente de texto o números) en un factor.
+
+  **Si queremos saber la clase de la variable debemos usar `class()`, aunque tambien `str()` te dice esta información.**
+
+  **Ejemplo:**
+
+```{r}
+identificador <- "gene_001"
+longitud <- 450L
+proporcion_gc <- 0.53
+anotado <- TRUE
+```
+
+```{r}
+class(identificador)
+```
+
+```{r}
+class(longitud)
+```
+
+```{r}
+class(proporcion_gc)
+```
+
+```{r}
+class(anotado)
+```
+
+```{r}
+class(1.5)
+```
+
+```{r}
+typeof(1.5)
+```
+
+```{r}
+str(identificador)
+```
+
+------------------------------------------------------------------------
+
+## Principales estructuras de datos en R
+
+Las estructuras de datos son objetos que contienen datos. Cuando trabajamos con R, lo que estamos haciendo es manipular estas estructuras.
+
+| **Estructura** | **Dimensión** | **Homogeneidad** | **Ejemplo** | **Uso típico** |
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| **Vector** | 1D | Homogénea (todos del mismo tipo) | `c(1,2,3)` | Secuencias simples de números, caracteres o lógicos |
+| **Lista** | 1D | Heterogénea (puede mezclar tipos) | `list(a=1:3, b="hola")` | Agrupar objetos distintos, resultados de modelos |
+| **Matriz** | 2D | Homogénea | `matrix(1:6, nrow=2)` | Cálculos numéricos, álgebra lineal |
+| **Array** | nD (más de 2 dimensiones) | Homogénea | `array(1:8, dim=c(2,2,2))` | Datos multidimensionales, imágenes, series temporales |
+| **Data frame** | 2D | Heterogénea (cada columna puede ser de distinto tipo) | `data.frame(x=1:3, y=c("a","b","c"))` | Datos tabulares, análisis estadístico |
+| **Tibble** | 2D | Heterogénea | `tibble(x=1:3, y=c("a","b","c"))` | Variante moderna de data frame, impresión más clara |
+
+### Vectores e indexación
+
+Un **vector atómico** contiene elementos del mismo tipo. Se construye con `c()` y se indexa mediante corchetes. **R comienza a contar posiciones desde 1**, no desde 0.
+
+```{r}
+genes <- c("gA", "gB", "gC", "gD")
+longitudes <- c(150, 400, 220, 510)
+
+length(genes)
+genes[1]
+genes[c(2, 4)]
+genes[longitudes >= 300]
+```
+
+Las operaciones vectorizadas se aplican a varios elementos sin escribir un ciclo explícito:
+
+```{r}
+longitudes / 3
+longitudes >= 300
+sum(longitudes >= 300)
+```
+
+`NA` representa un valor faltante. Una conversión puede introducir `NA` si el texto no se puede interpretar como número; nunca supongas que la conversión fue correcta sin revisarla.
+
+Podemos preguntar si hay valores faltantes en un vector
+
+```{r}
+is.na(c(10, NA, 20))
+```
+
+### Matrices y arreglos
+
+Una **matriz** tiene dos dimensiones y almacena elementos del mismo tipo. Un **arreglo** (*array*) generaliza esta idea a más dimensiones
+
+```{r}
+conteos <- matrix(
+  c(12, 8, 4, 6, 10, 2),#Agregas valores para llenar la matriz
+  nrow = 3,  #Especifica el número de filas
+  dimnames = list(c("g1", "g2", "g3"), c("M1", "M2")) #Asigna los nombres a las dimensiones mediante una lista
+)
+conteos
+```
+
+```{r}
+conteos[2, 1] #fila 2 columna 1
+conteos[3, 2] #fila 3 comuna 2
+```
+
+```{r}
+conteos[, "M2"] #Columna 2 (valores)
+conteos[, "M1"] #Columna 1 (valores)
+```
+
+En R, para acceder a elementos de una matriz siempre se usan corchetes con el formato **`[fila, columna]`**:
+
+**El espacio vacío antes de la coma (`[, ...]`):** Le indica a R que quieres **todas las filas**.
+
+```{r}
+dim(conteos)
+```
+
+Matriz 3x2
+
+```{r}
+arreglo <- array(1:8, dim = c(2, 2, 2))
+dim(arreglo)
+```
+
+### Desglose línea por línea
+
+- **`arreglo <- array(...)`**: Crea el objeto de tipo arreglo y lo guarda en la variable `arreglo`.
+
+- **`1:8`**: Son los datos que llenarán el arreglo (los números enteros del 1 al 8).
+
+- **`dim = c(2, 2, 2)`**: Define el tamaño de cada dimensión en este orden exacto:
+
+  1.  Primer `2`: **2 filas**.
+
+  2.  Segundo `2`: **2 columnas**.
+
+  3.  Tercer `2`: **2 capas** (o matrices de $2 \times 2$ apiladas).*(En total caben* $2 \times 2 \times 2 = 8$ elementos).
+
+- **`dim(arreglo)`**: Es una función que devuelve un vector con las dimensiones del objeto.
+
+------------------------------------------------------------------------
+
+### Data frames y tibbles
+
+Un **data frame** es una tabla: cada columna puede tener un tipo diferente, pero todas deben tener la misma cantidad de filas.
+
+```{r}
+anotaciones <- data.frame(
+  gen = c("g1", "g2", "g3"),
+  longitud = c(450, 120, 800),
+  producto = c("transportador", "hipotetica", "enzima")
+)
+
+anotaciones
+```
+
+```{r}
+str(anotaciones)
+```
+
+```{r}
+anotaciones$longitud
+```
+
+```{r}
+anotaciones[2, ]
+```
+
+```{r}
+anotaciones[anotaciones$longitud > 200, ]
+```
+
+Un **tibble** es una variante moderna de `data.frame`, con una impresión más compacta y comportamientos de selección más consistentes.
+
+------------------------------------------------------------------------
+
+### Listas y factores
+
+Las **listas** pueden almacenar objetos de distintos tipos y tamaños. Resultan útiles para reunir resultados de un análisis.
+
+```{r}
+muestra <- list(
+  id = "M01",
+  secuencias = c("ATGCGT", "CCATGA"),
+  anotaciones = anotaciones
+)
+
+muestra$id
+```
+
+```{r}
+muestra[["secuencias"]] #Extraer la lista, es un vector 
+```
+
+```{r}
+muestra["secuencias"] # Conserva la estructura de una lista
+```
+
+Un **factor** representa categorías con niveles definidos. Su orden puede importar al crear tablas o gráficos.
+
+```{r}
+condicion <- factor(c("control", "tratamiento", "control"),
+                    levels = c("control", "tratamiento"))
+levels(condicion)
+```
+
+### 3.2.5 Resumen de tipos de objetos
+
+| **Estructura** | **Dimensiones** | **¿Elementos del mismo tipo?** | **Ejemplo de uso** |
+|:----------------:|:----------------:|:-----------------:|:-----------------:|
+| Vector | 1 | Sí | Identificadores o longitudes |
+| Matriz | 2 | Sí | Conteos por gen y muestra |
+| Array | 2 o más | Sí | Datos multidimensionales |
+| Data frame / tibble | 2 | Por columna | Tabla de anotaciones |
+| Lista | Variable | No | Resultados heterogéneos |
+
+## 3.3 Operadores
+
+| **Aritméticos** | **Comparación** | **Argumentos lógicos (Logical Operators)** |
+|:------------------:|:-------------------:|:-----------------------------:|
+| `+` Adición / suma | `<` Menor que | `!x` - Not x (logical NOT) |
+| `-` Sustracción / resta | `>` Mayor que | `x & y` OR `x AND y` - (logical AND) |
+| `*` Multiplicación | `<=` Menor o igual que | `x && y` - identico |
+| `/` OR %% División | `>=` Mayor o igual que | `xor(x,y)` Funcion OR |
+| `^` OR \*\* Exponencial | `==` Igual a | `%in%` pertenece a |
+| `%/%` División integral | `!=` Diferente de |  |
+
+Otra forma de escribir OR es `x | y` OR `x || y`.
+
+### 3.3.1 Jerarquía de operaciones
+
+En R, al igual que en matemáticas, las operaciones tienen un orden de evaluación definido.
+
+Cuanto tenemos varias operaciones ocurriendo al mismo tiempo, en realidad, algunas de ellas son realizadas antes que otras y el resultado de ellas dependerá de este orden.
+
+| **Orden** |  **Operadores**   |
+|:---------:|:-----------------:|
+|     1     |        `^`        |
+|     2     |       `* /`       |
+|     3     |       `+ -`       |
+|     4     | `< > <= >= == !=` |
+|     5     |        `!`        |
+|     6     |        `&`        |
+|     7     |        OR         |
+
+------------------------------------------------------------------------
+
+# Estructuras de control
+
+Hasta ahora hemos ejecutado instrucciones de R de manera secuencial. Sin embargo, con frecuencia necesitamos **tomar decisiones** según las características de nuestros datos o **repetir operaciones** sin escribir el mismo código varias veces. Para ello utilizamos las *estructuras de control*.
+
+En esta sección estudiaremos dos grupos:
+
+- **Condicionales:** `if`, `else if` y `else`, que permiten ejecutar instrucciones dependiendo de una condición lógica.
+
+- **Ciclos:** `for` y `while`, que permiten repetir instrucciones. En `for` recorremos los elementos de una secuencia o colección; en `while` repetimos mientras una condición siga siendo verdadera.
+
+## 4.1 Condicionales: `if`, `else if` y `else`
+
+La instrucción `if` evalúa una condición cuyo resultado debe ser un único valor lógico: `TRUE` o `FALSE`. Si la condición es verdadera, ejecuta el bloque entre llaves; si es falsa, lo omite.
+
+```{r}
+if (condicion) {
+  # Instrucciones cuando la condición es TRUE
+}
+
+if (condicion) {
+  # Instrucciones cuando la condición es TRUE
+} else {
+  # Instrucciones cuando la condición es FALSE
+}
+
+if (condicion_1) {
+  # Primera alternativa
+} else if (condicion_2) {
+  # Segunda alternativa
+} else {
+  # Si ninguna condición anterior se cumple
+}
+```
+
+Por ejemplo, podemos decidir si una secuencia de ADN cumple con una longitud mínima:
+
+```{r}
+secuencia <- "ATGCGT"
+longitud <- nchar(secuencia) #nchar cuenta la cantidad de caracteres (o bytes o ancho visual) de cada elemento en un vector de texto
+
+if (longitud >= 10) {
+  print("La secuencia tiene al menos 10 nucleótidos")
+}
+
+```
+
+Como `longitud` vale 6, no se imprime ningún mensaje. Si queremos contemplar ambos casos, utilizamos `else`:
+
+```{r}
+if (longitud >= 10) {
+  print("La secuencia tiene al menos 10 nucleótidos")
+} else {
+  print("La secuencia tiene menos de 10 nucleótidos")
+}
+```
+
+Para distinguir más de dos situaciones, podemos incorporar `else if`:
+
+```{r}
+if (longitud >= 20) {
+  print("Secuencia larga")
+} else if (longitud >= 10) {
+  print("Secuencia mediana")
+} else {
+  print("Secuencia corta")
+}
+```
+
+R revisa las condiciones **en orden** y ejecuta únicamente el primer bloque cuya condición sea verdadera. Por ello, el orden de las comparaciones importa.
+
+La condición de `if` debe producir **un solo** `TRUE` o `FALSE`, y no debe ser `NA`. Para combinar condiciones escalares podemos utilizar `&&` (y) y `||` (o). Si necesitamos evaluar una condición sobre cada elemento de un vector, veremos más adelante `ifelse()`.
+
+### Validación de valores y condicionales anidados
+
+En ocasiones necesitamos comprobar primero si un dato es válido y después clasificarlo. Por ejemplo:
+
+```{r}
+valor <- -3
+
+if (is.na(valor)) {
+  print("El valor está ausente")
+} else {
+  if (valor < 0) {
+    print("Es negativo")
+  } else if (valor > 0) {
+    print("Es positivo")
+  } else {
+    print("Es cero")
+  }
+}
+```
+
+Este es un **condicional anidado**, porque contiene un `if` dentro de otro. En este caso también podemos escribir una versión sin anidamiento:
+
+```{r}
+if (is.na(valor)) {
+  print("El valor está ausente")
+} else if (valor < 0) {
+  print("Es negativo")
+} else if (valor > 0) {
+  print("Es positivo")
+} else {
+  print("Es cero")
+}
+```
+
+Ambas versiones producen el mismo resultado. La segunda suele ser más fácil de leer.
+
+### Condiciones sobre vectores: `ifelse()`, `all()`, `any()` y `which()`
+
+La función `ifelse()` evalúa una condición **elemento por elemento** y devuelve un resultado de acuerdo con si cada elemento satisface la condición.
+
+```{r}
+conteos <- c(0, 12, 4, 0, 25)
+
+estado <- ifelse(conteos > 0, "Detectado", "No detectado")
+estado
+```
+
+En cambio, `all()`, `any()` y `which()` resumen o localizan los resultados de comparaciones lógicas:
+
+```{r}
+conteos <- c(0, 12, 4, 0, 25)
+
+all(conteos >= 0)  # ¿Todos los conteos son no negativos?
+```
+
+```{r}
+any(conteos == 0)  # ¿Existe al menos un cero?
+```
+
+```{r}
+which(conteos == 0) # ¿En qué posiciones hay ceros?
+```
+
+Observa que `all()` y `any()` devuelven un único valor lógico, mientras que `which()` devuelve las **posiciones** de los elementos que cumplen la condición, no sus valores.
+
+**¿Qué sucede con los valores faltantes?**
+
+Si el vector contiene `NA`, `all()` y `any()` pueden devolver `NA` cuando no sea posible determinar el resultado. En algunos casos se puede usar `na.rm = TRUE`, pero primero hay que decidir si tiene sentido ignorar los datos faltantes. `which()` no incluye posiciones cuyo resultado lógico sea `NA`.
+
+## Ciclo `for`
+
+Un ciclo `for` ejecuta un bloque de instrucciones **una vez por cada elemento** de una secuencia o colección. Es útil cuando conocemos qué elementos queremos recorrer, por ejemplo, los identificadores de varias muestras o las secuencias almacenadas en un vector.
+
+```{r}
+for (elemento in coleccion) {
+  # Instrucciones que se ejecutan para cada elemento
+}
+```
+
+Un ejemplo sencillo consiste en recorrer los números del 1 al 5:
+
+```{r}
+for (i in 1:5) {
+  print(i)
+}
+
+```
+
+La variable `i` toma sucesivamente los valores de la secuencia. Al terminar el ciclo, conserva el último valor asignado en el entorno actual, aunque no es recomendable depender de ese efecto para escribir otros cálculos.
+
+### Recorrer secuencias biológicas
+
+Supongamos que tenemos varias secuencias y queremos conocer su longitud:
+
+```{r}
+secuencias <- c("ATGC", "ATGCGT", "CCATGAA")
+
+for (secuencia in secuencias) {
+  print(nchar(secuencia)) #cuenta cada caracter
+}
+```
+
+Si queremos **guardar** las longitudes para utilizarlas posteriormente, conviene crear primero un vector con el tamaño adecuado:
+
+```{r}
+longitudes <- numeric(length(secuencias))
+
+for (i in seq_along(secuencias)) {
+  longitudes[i] <- nchar(secuencias[i])
+}
+
+longitudes
+```
+
+Aquí `seq_along(secuencias)` genera las posiciones del vector. Es preferible a `1:length(secuencias)` porque también funciona correctamente si el vector está vacío.
+
+**Nota ¿Qué hace `seq_along()`?**
+
+La función `seq_along(x)` genera una secuencia de números enteros desde `1` hasta la longitud del objeto `x`. Es útil para recorrer los índices de un vector o una lista, especialmente dentro de un ciclo `for`.
+
+Por ejemplo, `seq_along(c("BRCA1", "TP53", "EGFR"))` devuelve `1, 2, 3`.
+
+A diferencia de `1:length(x)`, si el objeto está vacío, `seq_along(x)` devuelve una secuencia vacía, evitando iteraciones inesperadas.
+
+Cuando sabemos cuántos resultados vamos a guardar, es recomendable **reservar el espacio antes de iniciar el ciclo**, por ejemplo con `numeric()`, `character()` o `vector("list", n)`. Así evitamos ampliar el objeto en cada iteración.
+
+### Combinar `for` e `if`
+
+Podemos usar un condicional dentro de un ciclo para clasificar cada elemento:
+
+```{r}
+secuencias <- c("ATGC", "ATGCGT", "CCATGAA")
+
+for (secuencia in secuencias) {
+  if (nchar(secuencia) >= 6) {
+    print("Longitud de al menos 6 nucleótidos")
+  } else {
+    print("Longitud menor que 6 nucleótidos")
+  }
+}
+```
+
+## Ciclo `while`
+
+A diferencia de `for`, un ciclo `while` repite un bloque de instrucciones **mientras una condición sea verdadera**. La condición se comprueba antes de cada iteración: si desde el inicio es `FALSE`, el bloque no se ejecuta ninguna vez.
+
+```{r}
+while (condicion) {
+  # Instrucciones que se repiten mientras la condición sea TRUE
+}
+```
+
+Por ejemplo, podemos incrementar un contador hasta que alcance un valor determinado:
+
+```{r}
+i <- 0
+
+while (i < 5) {
+  print(i)
+  i <- i + 1
+}
+```
+
+En un `while` debemos asegurarnos de que alguna instrucción pueda modificar la condición de salida. De lo contrario, el ciclo podría continuar indefinidamente. Por ejemplo, el siguiente código **no debe ejecutarse**
+
+```{r}
+#i <- 0
+#while (i < 5) {
+#print(i)
+  # Falta incrementar i
+
+```
+
+### Ejemplo: encontrar un umbral
+
+Queremos encontrar el primer entero positivo cuyo cuadrado sea mayor que 50:
+
+```{r}
+limite <- 50
+numero <- 0
+
+while (numero^2 <= limite) {
+  numero <- numero + 1
+}
+
+numero
+```
+
+```{r}
+numero^2
+```
+
+El resultado es `8`, porque `7^2 = 49` no supera el límite, pero `8^2 = 64` sí.
+
+### Ejemplo: recorrer progresivamente una secuencia
+
+También podemos construir fragmentos crecientes de una secuencia:
+
+```{r}
+secuencia <- "ATGCGT"
+posicion <- 1
+fragmentos <- character(nchar(secuencia))
+
+while (posicion <= nchar(secuencia)) {
+  fragmentos[posicion] <- substr(secuencia, 1, posicion)
+  posicion <- posicion + 1
+}
+
+fragmentos
+```
+
+La función `substr(secuencia, 1, posicion)` extrae los caracteres comprendidos entre las posiciones indicadas.
+
+**Diferencia entre** `nchar()` **y** `length()`
+
+Aunque ambas funciones permiten medir la longitud de un objeto en R, **no hacen lo mismo**:
+
+- **`length(x)`** devuelve el número de elementos de un vector o una lista.
+
+- **`nchar(x)`** devuelve el número de caracteres de una cadena de texto.
+
+Por ejemplo:
+
+```{r}
+secuencia <- "ATGCGTA"
+
+length(secuencia)
+```
+
+```{r}
+nchar(secuencia)
+```
+
+En este caso, `length()` devuelve `1` porque la secuencia es un vector con un solo elemento, mientras que `nchar()` devuelve `7` porque la cadena contiene siete caracteres.
+
+**Importante:** Cuando trabajamos con secuencias biológicas almacenadas como texto, utilizamos `nchar()` para conocer su longitud en nucleótidos. Si queremos saber cuántas secuencias tenemos almacenadas en un vector, utilizamos `length()`.
+
+| **Estructura** | **¿Para qué sirve?** | **Ejemplo de aplicación** |
+|:----------------------:|:----------------------:|:----------------------:|
+| `if` / `else` | Elegir entre alternativas a partir de una condición única. | Verificar si un conteo es válido. |
+| `ifelse()` | Clasificar elementos de un vector. | Etiquetar conteos positivos y ceros. |
+| `for` | Recorrer una colección de elementos. | Calcular la longitud de varias secuencias. |
+| `while` | Repetir hasta que deje de cumplirse una condición. | Construir una secuencia hasta alcanzar una longitud. |
+
+------------------------------------------------------------------------
+
+# Funciones en R
+
+En un análisis bioinformático es frecuente repetir una misma tarea: calcular la longitud de distintas secuencias, revisar que una secuencia contenga únicamente nucleótidos válidos o resumir los conteos de diferentes muestras. En lugar de copiar y pegar instrucciones, podemos **definir una función** y reutilizarla con distintos datos.
+
+Una función recibe **argumentos**, ejecuta instrucciones y devuelve un **resultado**. En R se construye con `function()` y se asigna a un nombre mediante `<-`.
+
+```{r}
+nombre_funcion <- function(argumentos) {
+  # Instrucciones
+  resultado
+}
+```
+
+La última expresión evaluada se devuelve automáticamente. También podemos indicar explícitamente qué devolver mediante `return()`.
+
+## Crear y utilizar una función
+
+Supongamos que tenemos varias secuencias de ADN y queremos conocer cuántos nucleótidos contiene cada una. La función `nchar()` ya realiza ese cálculo, pero podemos incorporarla a una función propia para ilustrar su estructura.
+
+```{r}
+longitud_adn <- function(secuencia) {
+  longitud <- nchar(secuencia)
+  return(longitud)
+}
+
+longitud_adn("ATGCGTAA")
+longitud_adn("CCGTA")
+```
+
+Aquí, `secuencia` es el **parámetro** definido en la función; `"ATGCGTAA"` es el **argumento** que proporcionamos al llamarla. La variable `longitud` se crea dentro de la función.
+
+Podemos escribir la misma función sin `return()`:
+
+```{r}
+longitud_adn <- function(secuencia) {
+  nchar(secuencia)
+}
+
+longitud_adn("ATGCGTAA")
+```
+
+Las funciones permiten organizar el código, pero no es necesario crear una función nueva para cada operación. Si una función existente, como `nchar()`, ya resuelve directamente nuestra tarea, podemos utilizarla. Conviene definir funciones propias cuando queremos **reutilizar varios pasos**, expresar claramente una tarea o incorporar validaciones.
+
+### 5.1.1 Funciones con varios argumentos
+
+Una función puede recibir más de un argumento. Por ejemplo, podemos comprobar si una secuencia contiene un motivo específico de ADN mediante `grepl()`.
+
+```{r}
+contiene_motivo <- function(secuencia, motivo) {
+  grepl(motivo, secuencia, fixed = TRUE)
+}
+
+contiene_motivo("ATGCGTAA", "CGT")
+contiene_motivo("ATGCGTAA", "GGG")
+```
+
+El argumento `fixed = TRUE` indica que buscamos el motivo como texto literal, sin interpretarlo como una expresión regular. La función devuelve `TRUE` o `FALSE`.
+
+**\
+Nota¿Qué hace `fixed = TRUE` en `grepl()`?**
+
+La función `grepl(patron, texto)` busca si un patrón aparece dentro de una cadena de texto y devuelve `TRUE` si lo encuentra o `FALSE` en caso contrario.
+
+El argumento **`fixed = TRUE`** indica que el patrón debe buscarse como texto literal, sin interpretar caracteres especiales como expresiones regulares.
+
+Esto es útil cuando buscamos motivos o subsecuencias específicas de ADN, ya que queremos encontrar exactamente la combinación de nucleótidos indicada.
+
+Por ejemplo, `grepl("ATG", "CCATGTA", fixed = TRUE)` devuelve `TRUE` porque el motivo `"ATG"` aparece dentro de la secuencia.
+
+## Argumentos con valores predeterminados
+
+Podemos asignar valores por defecto a algunos parámetros. Así, quien utilice la función solo necesita proporcionar los argumentos que quiera modificar.
+
+Por ejemplo, una función puede convertir secuencias a mayúsculas y, opcionalmente, sustituir las letras `T` por `U` para representar una secuencia de ARN.
+
+```{r}
+preparar_secuencia <- function(secuencia, tipo = "ADN", mayusculas = TRUE) {
+  if (mayusculas) {
+    secuencia <- toupper(secuencia) #miniscula a mayusculas
+  }
+  
+  if (tipo == "ARN") {
+    secuencia <- chartr("T", "U", secuencia) #chartr de T a U
+  }
+  
+  secuencia
+}
+
+preparar_secuencia("atgcgt")
+preparar_secuencia("atgcgt", tipo = "ARN") # CAMBIA A ARN
+preparar_secuencia("atgcgt", mayusculas = FALSE)# NO SE VUELEVEN MAYUSCULAS
+preparar_secuencia("atgcgt", tipo = "ARN", mayusculas = TRUE) 
+#ARN y mayusculas
+```
+
+## Devolver varios resultados mediante una lista
+
+En R, una función devuelve un solo objeto. Si necesitamos varios resultados, podemos reunirlos en una **lista**, que puede contener elementos de diferentes tipos.
+
+Supongamos que queremos resumir una secuencia de ADN mediante su identificador, longitud y número de nucleótidos `G` y `C`.
+
+```{r}
+resumir_adn <- function(id, secuencia) {
+  secuencia <- toupper(secuencia)
+  bases <- strsplit(secuencia, split = "", fixed = TRUE)[[1]]
+  
+  list(
+    id = id,
+    longitud = nchar(secuencia),
+    conteo_gc = sum(bases %in% c("G", "C"))
+  )
+}
+
+resultado <- resumir_adn("GEN_01", "ATGCGTAA")
+resultado
+```
+
+```{r}
+resultado$id
+```
+
+```{r}
+resultado[["longitud"]]
+```
+
+La expresión `strsplit(...)[[1]]` separa los caracteres de la secuencia y extrae el vector resultante de la lista. El operador `%in%` comprueba cuáles caracteres pertenecen al conjunto `c("G", "C")`, y `sum()` cuenta los valores `TRUE`.
+
+------------------------------------------------------------------------
+
+## Validar argumentos: `stop()` y `stopifnot()`
+
+Una función debe evitar producir resultados engañosos cuando recibe datos incorrectos. Podemos comprobar las entradas y detener su ejecución con `stop()`, que permite mostrar un mensaje personalizado.
+
+```{r}
+validar_adn <- function(secuencia) {
+  if (!is.character(secuencia) ||
+      length(secuencia) != 1 ||
+      is.na(secuencia) ||
+      !grepl("^[ACGT]+$", toupper(secuencia))) {
+    stop("Se requiere una secuencia no vacía con bases A, C, G o T.")
+  }
+  
+  TRUE
+}
+
+validar_adn("ATGCGT")
+```
+
+En esta función, `^[ACGT]+$` es una **expresión regular**: exige que todos los caracteres sean `A`, `C`, `G` o `T`, y que exista al menos uno. El uso de `toupper()` permite aceptar letras minúsculas.
+
+En R, el operador **`||`** representa la operación lógica **O**. Permite combinar varias condiciones y devuelve `TRUE` cuando **al menos una de ellas es verdadera**.
+
+Por su parte, el operador **`!`** representa la negación lógica: cambia `TRUE` por `FALSE` y viceversa.
+
+En la función `validar_adn()`, utilizamos estos operadores para comprobar que una secuencia cumpla varios requisitos:
+
+- `!is.character(secuencia)`: la entrada no es texto.
+
+- `length(secuencia) != 1`: la entrada no contiene exactamente un elemento.
+
+- `is.na(secuencia)`: la entrada es un valor faltante (`NA`).
+
+- `!grepl("^[ACGT]+$", toupper(secuencia))`: la secuencia está vacía o contiene caracteres no permitidos.
+
+### ¿Qué hace la última condición?
+
+Analicemos la expresión:
+
+`!grepl("^[ACGT]+$", toupper(secuencia))`
+
+Esta instrucción combina varias operaciones:
+
+1.  **`toupper(secuencia)`** convierte todas las letras de la secuencia a mayúsculas. Por ejemplo, `"atgc"` se convierte en `"ATGC"`.
+
+2.  **`grepl(patron, texto)`** verifica si una cadena de texto cumple con un patrón y devuelve `TRUE` si encuentra una coincidencia o `FALSE` en caso contrario.
+
+3.  **`"^[ACGT]+$"`** es una *expresión regular*, es decir, un patrón que describe qué caracteres están permitidos y cómo deben aparecer:
+
+    - `^`: indica el inicio de la cadena.
+
+    - `[ACGT]`: permite cualquiera de las cuatro letras A, C, G o T.
+
+    - `+`: indica que debe aparecer **una o más veces** alguno de los caracteres permitidos.
+
+    - `$`: indica el final de la cadena.
+
+    En conjunto, el patrón exige que **toda la secuencia esté formada exclusivamente por A, C, G o T y que no esté vacía**.
+
+4.  **`!`** niega el resultado de `grepl()`. Por lo tanto, la condición será `TRUE` cuando la secuencia **no cumpla** con el patrón establecido.
+
+Por ejemplo:
+
+```{r}
+grepl("^[ACGT]+$", toupper("atgc"))
+```
+
+```{r}
+grepl("^[ACGT]+$", toupper("ATXG"))
+```
+
+```{r}
+!grepl("^[ACGT]+$", toupper("ATXG"))
+```
+
+### 5.4.2 ¿Cómo funciona toda la condición del `if`?
+
+Si **cualquiera de las condiciones unidas mediante `||` es verdadera**, se ejecuta `stop()`, que detiene la función y muestra un mensaje de error.
+
+En cambio, si todas las condiciones son falsas, la secuencia pasa la validación y la función devuelve `TRUE`.
+
+**Importante:** El operador `||` evalúa las condiciones de izquierda a derecha y se detiene cuando encuentra una verdadera. Esto evita evaluar condiciones posteriores cuando ya se detectó un error.
+
+```{r}
+validar_adn("ATNG")  # Error: contiene N
+validar_adn(1234)    # Error: no es texto
+```
+
+Para verificaciones breves también existe `stopifnot()`. Esta función detiene la ejecución si **alguna** de las condiciones que recibe no se cumple.
+
+```{r}
+longitud_validada <- function(secuencia) {
+  stopifnot(
+    is.character(secuencia),
+    length(secuencia) == 1,
+    !is.na(secuencia)
+  )
+  
+  nchar(secuencia)
+}
+
+
+longitud_validada("ATGCGT")
+```
+
+```{r}
+# longitud_validada(123)
+# Error en longitud_validada(123): is.character(secuencia) is not TRUE
+
+# longitud_validada(c("ATG", "CCA"))
+# Error en longitud_validada(c("ATG", "CCA")): 
+#length(secuencia) == 1 is not TRUE
+```
+
+**Nota**
+
+`stop()` resulta útil cuando queremos explicar claramente el problema. `stopifnot()` es práctico para comprobaciones cortas, aunque sus mensajes de error suelen ser menos descriptivos. En ambos casos, la función deja de ejecutarse si falla la validación.
+
+## Combinar funciones y estructuras de control
+
+Las funciones pueden incorporar `if`, `for` y `while`. Por ejemplo, podemos revisar varias secuencias y registrar cuáles contienen únicamente las bases `A`, `C`, `G` y `T`.
+
+```{r}
+revisar_secuencias <- function(secuencias) {
+  # Creamos el vector de resultados lógico (FALSE) de longitud n
+  resultado <- logical(length(secuencias))
+  
+  for (i in seq_along(secuencias)) {
+    # Extraemos la secuencia i y la guardamos en secuencia temporalmente
+    secuencia <- secuencias[i]
+    
+    if (is.na(secuencia)) {
+      # si es vacía asignamos FALSE
+      resultado[i] <- FALSE
+    } else {
+      # si no es vacía, verificamos que silo contenga A, C, G o T
+      resultado[i] <- grepl("^[ACGT]+$", toupper(secuencia))
+    }
+  }
+  
+  resultado
+}
+
+secuencias <- c("ATGCGT", "ACNTGA", "ttacga", NA)
+revisar_secuencias(secuencias)
+```
+
+`logical(length(secuencias))` crea un vector lógico para almacenar los resultados, mientras que `seq_along(secuencias)` genera los índices necesarios para recorrer el vector.
+
+------------------------------------------------------------------------
+
+# Scripts, paquetes y proyectos de RStudio
+
+Hasta ahora hemos ejecutado instrucciones para crear objetos, utilizar estructuras de control y definir funciones. El siguiente paso es **organizar esas instrucciones en un programa que pueda ejecutarse completo**, en lugar de depender de comandos aislados en la consola.
+
+## ¿Qué es un script de R?
+
+Un **script** es un archivo de texto con extensión `.R` que contiene una secuencia organizada de instrucciones. No basta con guardar comandos en un archivo: un script útil debe indicar **qué necesita para funcionar, qué operaciones realiza y qué resultados produce**.
+
+Ya aprendimos a crear archivos `.R` desde el editor de RStudio y a ejecutar líneas con **Run** o **Ctrl + Enter** (Windows/Linux) y **Cmd + Enter** (macOS). Ahora nos interesa aprender a **estructurar su contenido**.
+
+Un script de análisis suele tener las siguientes partes:
+
+1.  **Descripción:** propósito del programa y, cuando sea pertinente, autoría y fecha.
+
+2.  **Dependencias:** paquetes y funciones que se utilizarán.
+
+3.  **Datos de entrada:** objetos o archivos necesarios.
+
+4.  **Procesamiento:** operaciones, condiciones, ciclos o llamadas a funciones.
+
+5.  **Resultados:** objetos, tablas o archivos que se obtienen.
+
+Estas partes no son reglas obligatorias del lenguaje, sino una forma de escribir código más claro y fácil de revisar.
+
+## Ejemplo: organizar un análisis de secuencias
+
+Supongamos que recibimos identificadores de muestras y secuencias de ADN. Queremos construir una tabla que indique cuáles secuencias contienen caracteres válidos y cuál es su longitud.
+
+Podríamos ejecutar los comandos uno por uno en la consola. Sin embargo, si guardamos el procedimiento en un script, podemos repetirlo sin reconstruir manualmente los objetos.
+
+```{r}
+# --------------------------------------------------
+# Análisis básico de secuencias de ADN
+# Objetivo: revisar secuencias y resumir longitudes
+# --------------------------------------------------
+
+# 1. Datos de entrada
+muestras <- c("M01", "M02", "M03", "M04")
+secuencias <- c("ATGCCG", "ATNNGA", "GGCTTA", "ATG")
+
+# 2. Verificar que hay un identificador por secuencia
+stopifnot(length(muestras) == length(secuencias))
+
+# 3. Procesar los datos
+longitudes <- nchar(secuencias)
+secuencia_valida <- grepl("^[ACGT]+$", secuencias)
+
+# 4. Organizar y mostrar los resultados
+resumen <- data.frame(
+  muestra = muestras,
+  secuencia = secuencias,
+  longitud = longitudes,
+  valida = secuencia_valida
+)
+
+print(resumen)
+```
+
+Observa que el script **define sus propios datos de entrada**, comprueba una condición importante y construye el resultado. No necesita que `muestras` o `secuencias` existan previamente en el panel *Environment*.
+
+## ¿Dónde entran los paquetes?
+
+Un script puede utilizar funciones incluidas en R o funciones proporcionadas por paquetes adicionales. Como ya vimos cómo **instalar** y **cargar** paquetes, aquí solo necesitamos distinguir su papel dentro de un programa:
+
+- `install.packages()` prepara un paquete en nuestra computadora; **no es una instrucción que debamos ejecutar cada vez que corremos el análisis**.
+
+- `library()` permite utilizar las funciones de un paquete durante la sesión actual.
+
+- `paquete::funcion()` permite llamar una función específica indicando de qué paquete proviene.
+
+Por ejemplo, más adelante leeremos archivos tabulares con `readr::read_csv()`. Para que un script sea fácil de reproducir, conviene que sus dependencias sean explícitas y que **no intente instalar paquetes automáticamente cada vez que se ejecuta**.
+
+```{r}
+# Ejemplo de uso de un paquete dentro de un script:
+# library(readr)
+# datos <- read_csv("data_raw/muestras.csv")
+
+# Alternativa sin cargar el paquete completo:
+# datos <- readr::read_csv("data_raw/muestras.csv")
+```
+
+## 6.4 ¿Qué aporta un proyecto de RStudio?
+
+Ya creamos un proyecto `.Rproj` y comprobamos su directorio de trabajo con `getwd()`. Su utilidad práctica aparece cuando comenzamos a tener **varios scripts, archivos de entrada y resultados** que deben mantenerse juntos.
+
+Una organización sencilla podría ser:
+
+analisis_secuencias/ ├── analisis_secuencias.Rproj ├── data_raw/ ├── scripts/ │ └── 01_revision_secuencias.R ├── results/ └── README.md
+
+## Ejecutar y revisar un script completo
+
+Una buena prueba consiste en **reiniciar la sesión de R y ejecutar el script desde la primera hasta la última línea**. Esto permite detectar si el código utiliza objetos que solo existían porque los creamos antes en la consola.
+
+Antes de considerar terminado un script, revisa que:
+
+- Las entradas estén definidas o se lean desde archivos identificables.
+
+- Las instrucciones estén en un orden lógico.
+
+- Los nombres de los objetos permitan reconocer su contenido.
+
+- Las funciones y paquetes necesarios estén identificados.
+
+- Los resultados se puedan obtener sin ejecutar comandos adicionales manualmente.
+
+------------------------------------------------------------------------
+
+# Importación y exploración de datos bioinformáticos en R
+
+## Introducción
+
+En la sesión anterior aprendimos a crear objetos, utilizar estructuras de control y escribir funciones. Ahora trabajaremos con información que **ya está guardada en archivos**. El objetivo no es volver a estudiar BLAST ni aprender a ejecutar herramientas bioinformáticas: utilizaremos archivos con una estructura parecida a sus resultados para aprender a leerlos, reconocer sus columnas y explorar su contenido desde R.
+
+Al finalizar podrás identificar la estructura de un archivo, importar tablas con R base y con `readr`, explorar su contenido, reconocer problemas frecuentes de lectura y extraer información sencilla sin modificar los archivos originales.
+
+**Antes de comenzar**
+
+Los datos de esta sesión son **sintéticos**. Los valores de identidad, E-value y puntuación son ilustrativos; no representan resultados reales de una búsqueda BLAST ni deben utilizarse para inferencias biológicas.
+
+## Archivos de trabajo
+
+Descarga y descomprime [`datos_sesion_02_blast.zip`](https://github.com/CursosENESJuriquilla/Intro_to_R_Bioinfo_2027-1/raw/refs/heads/main/data/datos_sesion_02_blast.zip). Dentro de tu proyecto de RStudio crea `data_raw/` y coloca ahí la carpeta descomprimida. Tendrás, entre otros, los archivos:
+
+```         
+mi_proyecto/
+├── mi_proyecto.Rproj
+├── data_raw/
+│   └── datos_sesion_02_blast/
+│       ├── resultados_blast.tsv
+│       ├── metadata_secuencias.csv
+│       ├── secuencias.fasta
+│       ├── blast_comentarios.tsv
+│       ├── blast_separador_incorrecto.csv
+│       └── blast_valores_faltantes.tsv
+└── scripts/
+```
+
+Los ejemplos utilizan rutas relativas a la raíz del proyecto. Si guardas los archivos en otra carpeta, modifica las rutas.
+
+## Reconocer archivos desde R
+
+Antes de importar un archivo conviene responder tres preguntas: **¿dónde está?, ¿cómo está organizado? y ¿qué información contiene?**. La extensión es una pista, pero no garantiza su contenido.
+
+```{r}
+getwd()  # Directorio de trabajo actual
+```
+
+```{r}
+list.files("data_raw/datos_sesion_02_blast")
+```
+
+```{r}
+file.exists("data_raw/datos_sesion_02_blast/resultados_blast.tsv")
+```
+
+```{r}
+file.info("data_raw/datos_sesion_02_blast/resultados_blast.tsv")
+```
+
+`list.files()` muestra los nombres disponibles; `file.exists()` comprueba una ruta y `file.info()` ofrece información como tamaño y fecha de modificación. `getwd()` permite verificar dónde está trabajando R; cuando abres tu proyecto, normalmente coincide con su carpeta raíz.
+
+Podemos guardar una ruta en un objeto para no repetirla:
+
+```{r}
+archivo_blast <- "data_raw/datos_sesion_02_blast/resultados_blast.tsv"
+file.exists(archivo_blast)
+```
+
+### Mirar el contenido sin importarlo todavía
+
+`readLines()` lee líneas de texto. Es útil para inspeccionar un archivo desconocido, comprobar si tiene encabezados o reconocer su separador.
+
+```{r}
+readLines(archivo_blast, n = 5)
+```
+
+En el archivo de práctica verás una primera línea con nombres de columnas y, después, registros. Los campos están separados por **tabulaciones** (`\t`), no por comas.
+
+| **Extensión habitual** | **Contenido frecuente** | **Separador o estructura** |
+|:----------------------:|:----------------------:|:----------------------:|
+| `.csv` | Tabla | Comas, aunque depende de cómo se exportó |
+| `.tsv` | Tabla | Tabulaciones |
+| `.txt` | Texto o tabla | Depende del archivo |
+| `.fasta` / `.fa` | Secuencias | Encabezados `>` y líneas de secuencia |
+| `.gz` | Archivo comprimido | Depende del formato interno |
+
+**\
+NotaUna precaución útil**
+
+No basta con mirar la extensión. Un archivo llamado `.csv` podría estar separado por tabulaciones. Conviene inspeccionar sus primeras líneas si no conoces su procedencia.
+
+## Importación de archivos tabulares
+
+Una tabla tiene filas (registros) y columnas (variables o atributos). En nuestro ejemplo, cada fila representa un resultado de alineamiento y contiene identificadores y valores asociados. **Importar** significa interpretar correctamente esa estructura y convertirla en un objeto de R.
+
+### CSV y TSV con R base
+
+```{r}
+blast <- read.delim("data_raw/datos_sesion_02_blast/resultados_blast.tsv")
+metadata <- read.csv("data_raw/datos_sesion_02_blast/metadata_secuencias.csv",
+                     colClasses = c(codigo_muestra = "character"))
+
+class(blast)
+```
+
+```{r}
+head(blast)
+```
+
+```{r}
+head(metadata)
+```
+
+`read.csv()` asume comas y `read.delim()` asume tabulaciones. Ambas devuelven un `data.frame`. La opción `colClasses` permite indicar que `codigo_muestra` es texto, de modo que los ceros iniciales de identificadores como `001` no desaparezcan.
+
+### Importación con `readr`
+
+`readr` ofrece funciones equivalentes, mensajes sobre los tipos de columnas y herramientas para detectar problemas de lectura. Instálalo una sola vez si aún no lo tienes; después cárgalo en cada sesión donde lo utilices.
+
+```{r}
+#install.packages("readr")  # Solo si no está instalado
+library(readr)
+blast <- readr::read_tsv(
+  "data_raw/datos_sesion_02_blast/resultados_blast.tsv",
+  show_col_types = FALSE
+)
+
+metadata <- readr::read_csv(
+  "data_raw/datos_sesion_02_blast/metadata_secuencias.csv",
+  col_types = readr::cols(codigo_muestra = readr::col_character()),
+  show_col_types = FALSE
+)
+```
+
+El argumento `show_col_types = FALSE` permite **ocultar el mensaje que muestra los tipos de datos detectados** al importar un archivo con `readr`. No modifica los datos ni los tipos de columnas, únicamente evita que aparezca el mensaje en la consola.
+
+Para consultar posteriormente los tipos de datos detectados, se puede utilizar `readr::spec(blast)`.
+
+En este caso, `read_tsv()` devuelve un **tibble**, una versión moderna del `data.frame`. La diferencia no es el contenido biológico, sino ciertas características de impresión y comportamiento en R.
+
+```{r}
+class(blast)
+```
+
+```{r}
+class(metadata)
+```
+
+|   **R base**   |  **`readr`**   |               **Uso**               |
+|:--------------:|:--------------:|:-----------------------------------:|
+|  `read.csv()`  |  `read_csv()`  |    Archivos separados por comas     |
+| `read.delim()` |  `read_tsv()`  | Archivos separados por tabulaciones |
+| `read.table()` | `read_delim()` | Archivos con separador configurable |
+
+No es necesario utilizar ambos sistemas simultáneamente. Los comparamos para que puedas leer código escrito por otras personas; en las siguientes prácticas usaremos principalmente `readr`.
+
+### Encabezados, comentarios y valores faltantes
+
+Algunos archivos tienen líneas explicativas antes de la tabla. Por ejemplo, `blast_comentarios.tsv` comienza con dos líneas que llevan `#`.
+
+```{r}
+readLines("data_raw/datos_sesion_02_blast/blast_comentarios.tsv", n = 4)
+```
+
+```{r}
+blast_con_comentarios <- readr::read_tsv(
+  "data_raw/datos_sesion_02_blast/blast_comentarios.tsv",
+  comment = "#",
+  show_col_types = FALSE
+)
+
+head(blast_con_comentarios)
+```
+
+`comment = "#"` indica que esas líneas no son registros de la tabla. No elimina los comentarios del archivo original. Simplemente los ignora durante la importación.
+
+Por otra parte, un campo vacío o la cadena `NA` pueden representar información faltante:
+
+```{r}
+blast_na <- readr::read_tsv(
+  "data_raw/datos_sesion_02_blast/blast_valores_faltantes.tsv",
+  na = c("", "NA"),
+  show_col_types = FALSE
+)
+anyNA(blast_na)
+```
+
+El argumento `na = c("", "NA")` indica a `readr` qué valores deben interpretarse como **datos faltantes (`NA`)** al importar el archivo.
+
+En este caso: - `""`: las celdas vacías se interpretan como `NA`. - `"NA"`: las celdas que contienen literalmente el texto `NA` también se interpretan como valores faltantes.
+
+Esto permite identificar y manejar los datos faltantes de manera consistente durante el análisis.
+
+### Problemas al interpretar columnas
+
+Una columna que debería contener números puede importarse como texto si incluye valores inesperados. No siempre es un error del programa: a veces es una característica del archivo. Antes de convertir tipos, revisa qué contiene realmente la columna.
+
+```{r}
+str(blast)
+```
+
+```{r}
+readr::spec(blast)
+```
+
+```{r}
+readr::problems(blast)
+```
+
+- La función `str(blast)` permite consultar la **estructura de un objeto en R**, mostrando el tipo de objeto, sus dimensiones, los nombres de las columnas, sus tipos de datos y algunos de sus valores.
+
+- La función `readr::spec()` permite consultar las **especificaciones de las columnas** de un conjunto de datos importado con `readr`, especialmente los tipos de datos que se asignaron durante la lectura del archivo.
+
+- La función `readr::problems(blast)` permite identificar **problemas detectados durante la importación de los datos** con `readr`, como valores que no corresponden al tipo de dato esperado. Si no se detectaron problemas, devuelve una tabla vacía.
+
+Para observar cómo funciona `problems()` cuando se detectan errores de importación, construiremos un pequeño conjunto de datos directamente en R. En este ejemplo, la columna identidad debería contener únicamente valores numéricos, pero introduciremos intencionalmente un texto (“error”). Indicaremos a R que esa columna debe ser numérica y revisaremos qué ocurre al importar los datos y cómo podemos identificar el problema.
+
+```{r}
+# Simulamos el contenido de un archivo TSV
+blast_error <- read_tsv(
+  I("secuencia\tidentidad
+seq1\t98.5
+seq2\t95.2
+seq3\terror
+seq4\t99.1"),
+  col_types = cols(
+    secuencia = col_character(),
+    identidad = col_double()
+  )
+)
+```
+
+```{r}
+# Revisamos los datos importados
+blast_error
+```
+
+```{r}
+# Consultamos los problemas de importación
+problems(blast_error)
+```
+
+## 7.5 Explorar el contenido de una tabla
+
+Importar no significa comprender. Antes de analizar una tabla, debemos identificar qué representa cada fila, qué contiene cada columna y cuántos registros tenemos.
+
+### 7.5.1 Dimensiones, nombres y tipos
+
+```{r}
+dim(blast)       # Filas y columnas
+```
+
+```{r}
+nrow(blast)      # Número de filas
+```
+
+```{r}
+ncol(blast)      # Número de columnas
+```
+
+```{r}
+names(blast)     # Nombres de columnas
+```
+
+```{r}
+head(blast, 4)   # Primeras cuatro filas
+```
+
+```{r}
+tail(blast, 3)   # Últimas tres filas
+```
+
+```{r}
+str(blast)       # Estructura y tipos
+```
+
+```{r}
+summary(blast)   # Resumen por columna
+```
+
+`summary()` produce un resumen que depende del tipo de columna; **no constituye por sí solo un análisis estadístico**. Aquí lo usamos para reconocer rangos de valores y detectar posibles lecturas incorrectas.
+
+### Seleccionar columnas y filas
+
+R base permite seleccionar información con corchetes.
+
+```{r}
+blast$query_id# Una columna  
+```
+
+```{r}
+blast[, c("query_id", "pident")]
+```
+
+```{r}
+blast[1:5, ] # Primeras cinco filas
+```
+
+```{r}
+blast[blast$query_id == "seq01", ]
+```
+
+```{r}
+blast[blast$pident >= 90, ]
+```
+
+La última instrucción selecciona filas cuyo porcentaje de identidad es al menos 90. **Es un filtro descriptivo para practicar R**, no una regla universal para determinar homología o significancia biológica.
+
+### Valores únicos y frecuencias
+
+```{r}
+unique(blast$query_id)
+```
+
+```{r}
+length(unique(blast$query_id))
+```
+
+```{r}
+table(blast$query_id)
+```
+
+```{r}
+sort(table(blast$query_id), decreasing = TRUE)
+```
+
+- `unique()` devuelve los identificadores distintos.
+
+- `table()` construye una **tabla de frecuencias**, contando cuántas veces aparece cada valor diferente en un vector.
+
+  ### Preguntas que podemos responder
+
+  Con estas funciones podemos averiguar cuántas consultas tienen resultados, cuántos registros corresponden a cada consulta y qué filas cumplen una condición. También podemos observar si hay valores faltantes:
+
+```{r}
+colSums(is.na(blast))
+```
+
+```{r}
+anyNA(blast)
+```
+
+No vamos a eliminar registros ni corregir valores automáticamente: primero debemos entender qué representan.
+
+## 7.6 Cuando una importación no sale como esperamos
+
+Los problemas más comunes suelen ser de **formato**, no de biología. Veamos cómo reconocerlos antes de seguir trabajando.
+
+### 7.6.1 Separador equivocado
+
+```{r}
+ruta <- "data_raw/datos_sesion_02_blast/blast_separador_incorrecto.csv"
+mal <- readr::read_csv(ruta, show_col_types = FALSE)
+names(mal)
+```
+
+```{r}
+bien <- readr::read_tsv(ruta, show_col_types = FALSE)
+names(bien)
+```
+
+```{r}
+bien <- readr::read_tsv(ruta, show_col_types = FALSE)
+names(bien)
+```
+
+Si la primera lectura genera una sola columna que contiene tabulaciones, el separador es incorrecto. La solución no es renombrar el archivo, sino elegir la función de lectura adecuada.
+
+### Identificadores que parecen números
+
+Un identificador como `001` no necesariamente representa el número 1. Si se convierte a número, pierde los ceros iniciales. Por eso conviene declarar su tipo como carácter cuando sea necesario.
+
+```{r}
+metadata <- readr::read_csv(
+  "data_raw/datos_sesion_02_blast/metadata_secuencias.csv",
+  col_types = readr::cols(codigo_muestra = readr::col_character()),
+  show_col_types = FALSE
+)
+metadata$codigo_muestra
+```
+
+El argumento `col_types` permite **especificar manualmente el tipo de dato de una o varias columnas** al importar un archivo, en lugar de dejar que `readr` lo detecte automáticamente.
+
+En este ejemplo:
+
+- `readr::cols()` define las especificaciones de los tipos de columnas.
+
+- `codigo_muestra = readr::col_character()` indica que la columna `codigo_muestra` debe importarse como **texto (`character`)**, aunque contenga números.
+
+Esto es especialmente útil para identificadores de muestras, ya que permite conservar códigos como `"001"`, `"002"` o `"003"` sin perder los ceros iniciales.
+
+Las columnas que no se especifican se interpretan automáticamente.
+
+### Ausencias y registros repetidos
+
+```{r}
+blast_na <- readr::read_tsv(
+  "data_raw/datos_sesion_02_blast/blast_valores_faltantes.tsv",
+  show_col_types = FALSE
+)
+colSums(is.na(blast_na))
+```
+
+```{r}
+anyDuplicated(blast_na)
+```
+
+```{r}
+anyDuplicated(blast_na$query_id)
+```
+
+`anyDuplicated(blast_na$query_id)` puede devolver un índice distinto de cero, porque varias filas comparten la misma consulta. **No debemos confundir identificadores repetidos con filas duplicadas**: cada fila puede describir un alineamiento diferente.
+
+**PrecauciónNo corrijas datos sin conocer su significado**
+
+Evita borrar filas, reemplazar `NA` por cero o convertir columnas indiscriminadamente. Primero revisa la documentación del archivo y qué representa cada valor.
+
+##  Una mirada breve a FASTA desde R
+
+FASTA es un formato de texto utilizado para almacenar secuencias. Aquí **no construiremos un analizador completo de FASTA** ni utilizaremos paquetes especializados: solo aprovecharemos funciones de texto para reconocer su estructura.
+
+```{r}
+lineas <- readLines("data_raw/datos_sesion_02_blast/secuencias.fasta")
+head(lineas, 6)
+```
+
+Las líneas que comienzan con `>` contienen encabezados. Podemos localizarlas con `grep()`:
+
+```{r}
+encabezados <- grep("^>", lineas, value = TRUE)
+encabezados
+```
+
+```{r}
+length(encabezados)
+```
+
+El símbolo `^` indica el inicio de la línea y `>` es el carácter que buscamos. Este ejemplo funciona incluso si un archivo FASTA contiene secuencias repartidas en varias líneas, porque **solo estamos contando encabezados**, no intentando reconstruir las secuencias.
+
+------------------------------------------------------------------------
+
+# Manipulación y transformación de datos bioinformáticos con dplyr y tidyr
+
+## Introducción
+
+En la sesión 2 aprendimos a reconocer archivos, importar tablas y explorar su contenido. Ahora vamos a **transformar** esas tablas para responder preguntas concretas: ¿qué alineamientos cumplen ciertos criterios?, ¿cuántos resultados hay por secuencia de consulta?, ¿cómo crear nuevas columnas? y ¿cómo reorganizar una tabla para facilitar su análisis?
+
+Trabajaremos con **resultados sintéticos con la estructura de una salida tabular de BLAST**, así como con una tabla pequeña de conteos de genes. No necesitamos ejecutar BLAST ni interpretar los resultados como hallazgos biológicos: los archivos son materiales didácticos.
+
+Al finalizar podrás:
+
+1.  Utilizar `%>%` para encadenar operaciones sobre tablas.
+
+2.  Seleccionar, filtrar, ordenar, renombrar y eliminar registros repetidos con `dplyr`.
+
+3.  Crear variables nuevas y resumir registros por grupos.
+
+4.  Reconocer la diferencia entre formatos ancho y largo, y convertirlos con `tidyr`.
+
+5.  Guardar tablas transformadas sin sobrescribir los datos originales.
+
+##  Archivos y preparación
+
+Descarga los datos nuevos y descomprímelos [datos_sesion_03_dplyr.zip](https://github.com/CursosENESJuriquilla/Intro_to_R_Bioinfo_2027-1/raw/refs/heads/main/data/datos_sesion_03_dplyr.zip).
+
+Utilizaremos `resultados_blast.tsv` de la sesión 2 y un archivo adicional `conteos_genes.csv`. Organiza las carpetas así:
+
+mi_proyecto/
+├── mi_proyecto.Rproj
+├── data_raw/
+│ ├── datos_sesion_02_blast/
+│ │ └── resultados_blast.tsv
+│ └── datos_sesion_03/
+│ └── conteos_genes.csv
+└── results/
+
+La instalación de paquetes se realiza una sola vez en cada equipo; `library()` se utiliza en las sesiones en que los necesitemos.
+
+```{r}
+#install.packages(c("readr", "dplyr", "tidyr", "tibble"))
+```
+
+```{r}
+library(readr)
+library(dplyr)
+library(tidyr)
+library(tibble)
+getwd()
+```
+
+```{r}
+ruta_blast <- "data_raw/datos_sesion_02_blast/resultados_blast.tsv"
+ruta_conteos <- "data_raw/datos_sesion_03_dplyr/conteos_genes.csv"
+stopifnot(file.exists(ruta_blast), file.exists(ruta_conteos))
+
+blast <- read_tsv(ruta_blast, show_col_types = FALSE)
+conteos <- read_csv(ruta_conteos, show_col_types = FALSE)
+
+glimpse(blast)
+```
+
+```{r}
+glimpse(conteos)
+```
+
+**\
+NotaInspección de la estructura de los datos**
+
+La función `glimpse()` permite inspeccionar rápidamente la estructura de un conjunto de datos. Muestra el número de filas y columnas, los nombres de las variables, sus tipos de datos y algunos de sus valores.
+
+A diferencia de `head()`, que presenta las primeras filas en forma de tabla, `glimpse()` organiza la información por columnas, lo que facilita revisar conjuntos de datos con muchas variables.
+
+| **Función** | **¿Qué muestra?** |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `head()` | Las primeras 6 filas del conjunto de datos, en forma de tabla. |
+| `glimpse()` | El número de filas y columnas, los nombres de las variables, sus tipos de datos y algunos valores. |
+| `str()` | La estructura interna del objeto en R, incluyendo tipos de datos y una vista de su contenido. |
+
+Estas funciones son útiles después de importar archivos bioinformáticos para comprobar que R haya interpretado correctamente la estructura y los tipos de datos, antes de comenzar su manipulación o análisis.
+
+**\
+Nota**
+
+**Convención:** en los ejemplos se utiliza `%>%` (del paquete `magrittr`, reexportado por `dplyr`). No utilizaremos el operador nativo `|>` en estas notas. Los criterios numéricos de filtrado son **ejemplos para practicar R**, no umbrales universales para determinar homología o significancia biológica.
+
+## Introducción a `tibble`, `dplyr`
+
+### 8.3.1 ¿Qué es un `tibble`?
+
+Un `tibble` es una variante moderna de `data.frame`. Conserva la estructura de filas y columnas, pero suele mostrar los datos de manera más compacta, indicando el tipo de cada columna. `readr` importa archivos como tibbles.
+
+```{r}
+class(blast)
+```

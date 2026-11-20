@@ -1,0 +1,6 @@
+"0","archivo_blast <- ""data_raw/datos_sesion_02_blast/resultados_blast.tsv"""
+"0","file.exists(archivo_blast)"
+"1","[1]"
+"1"," TRUE"
+"1","
+"

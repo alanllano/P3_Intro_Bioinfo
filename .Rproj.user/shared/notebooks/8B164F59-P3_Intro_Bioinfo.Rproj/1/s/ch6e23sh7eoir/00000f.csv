@@ -1,0 +1,5 @@
+"0","for (elemento in coleccion) {"
+"0","  # Instrucciones que se ejecutan para cada elemento"
+"0","}"
+"2","Error: object 'coleccion' not found
+"

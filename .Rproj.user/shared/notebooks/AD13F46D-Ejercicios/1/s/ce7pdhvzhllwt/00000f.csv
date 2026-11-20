@@ -1,0 +1,16 @@
+"0","if (is.na(conteo)) {
+  print(""Dato faltante"")
+} else {
+  if (conteo < 0) {
+    print(""Conteo inválido"")
+  } else if (conteo > 0) {
+    print(""Con lecturas"")
+  } else {
+    print(""Sin lecturas"")
+  }
+}
+"
+"1","[1]"
+"1"," ""Conteo inválido"""
+"1","
+"

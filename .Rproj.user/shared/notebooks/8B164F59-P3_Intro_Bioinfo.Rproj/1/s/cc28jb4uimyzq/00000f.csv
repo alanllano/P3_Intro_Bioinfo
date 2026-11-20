@@ -1,0 +1,8 @@
+"0","condicion <- factor(c(""control"", ""tratamiento"", ""control""),"
+"0","                    levels = c(""control"", ""tratamiento""))"
+"0","levels(condicion)"
+"1","[1]"
+"1"," ""control""    "
+"1"," ""tratamiento"""
+"1","
+"

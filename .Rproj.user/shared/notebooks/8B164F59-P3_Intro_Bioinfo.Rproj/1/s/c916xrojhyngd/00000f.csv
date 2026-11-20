@@ -1,0 +1,5 @@
+"0","while (condicion) {"
+"0","  # Instrucciones que se repiten mientras la condición sea TRUE"
+"0","}"
+"2","Error in while (condicion) { : the condition has length > 1
+"

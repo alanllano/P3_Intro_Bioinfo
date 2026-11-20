@@ -1,0 +1,17 @@
+"0","install.packages(c(""readr"", ""dplyr"", ""tidyr"", ""tibble""))"
+"2","trying URL 'https://cran.rstudio.com/bin/macosx/sonoma-arm64/contrib/4.6/readr_2.2.0.tgz'
+"
+"2","trying URL 'https://cran.rstudio.com/bin/macosx/sonoma-arm64/contrib/4.6/dplyr_1.2.1.tgz'
+"
+"2","trying URL 'https://cran.rstudio.com/bin/macosx/sonoma-arm64/contrib/4.6/tidyr_1.3.2.tgz'
+"
+"2","trying URL 'https://cran.rstudio.com/bin/macosx/sonoma-arm64/contrib/4.6/tibble_3.3.1.tgz'
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	/var/folders/37/3cnh1b7d2yldhymw02w9ftw00000gn/T//Rtmp9nWcGb/downloaded_packages"
+"1",""
+"1","
+"
