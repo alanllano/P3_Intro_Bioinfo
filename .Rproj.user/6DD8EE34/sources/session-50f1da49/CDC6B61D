@@ -3,7 +3,7 @@
     "path": "~/P3_Intro_Bioinfo/Ejercicios.qmd",
     "project_path": "Ejercicios.qmd",
     "type": "quarto_markdown",
-    "hash": "2821830896",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1795104625586.0,
@@ -19,14 +19,14 @@
         "rmdVisualCollapsedChunks": "",
         "cursorPosition": "312,0",
         "scrollLine": "742",
-        "rmdVisualModeLocation": "7095:9891.875"
+        "rmdVisualModeLocation": "7095:0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1795154444,
+    "lastKnownWriteTime": 1795154793,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1795154444069,
+    "last_content_update": 1795154793,
     "read_only": false,
     "read_only_alternatives": []
 }

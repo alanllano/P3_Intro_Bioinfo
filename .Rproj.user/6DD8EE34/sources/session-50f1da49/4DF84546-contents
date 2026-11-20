@@ -315,7 +315,7 @@ str(identificador)
 Las estructuras de datos son objetos que contienen datos. Cuando trabajamos con R, lo que estamos haciendo es manipular estas estructuras.
 
 | **Estructura** | **Dimensión** | **Homogeneidad** | **Ejemplo** | **Uso típico** |
-|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+|:--:|:--:|:--:|:--:|:--:|
 | **Vector** | 1D | Homogénea (todos del mismo tipo) | `c(1,2,3)` | Secuencias simples de números, caracteres o lógicos |
 | **Lista** | 1D | Heterogénea (puede mezclar tipos) | `list(a=1:3, b="hola")` | Agrupar objetos distintos, resultados de modelos |
 | **Matriz** | 2D | Homogénea | `matrix(1:6, nrow=2)` | Cálculos numéricos, álgebra lineal |
@@ -476,7 +476,7 @@ levels(condicion)
 ### 3.2.5 Resumen de tipos de objetos
 
 | **Estructura** | **Dimensiones** | **¿Elementos del mismo tipo?** | **Ejemplo de uso** |
-|:----------------:|:----------------:|:-----------------:|:-----------------:|
+|:--:|:--:|:--:|:--:|
 | Vector | 1 | Sí | Identificadores o longitudes |
 | Matriz | 2 | Sí | Conteos por gen y muestra |
 | Array | 2 o más | Sí | Datos multidimensionales |
@@ -486,7 +486,7 @@ levels(condicion)
 ## 3.3 Operadores
 
 | **Aritméticos** | **Comparación** | **Argumentos lógicos (Logical Operators)** |
-|:------------------:|:-------------------:|:-----------------------------:|
+|:--:|:--:|:--:|
 | `+` Adición / suma | `<` Menor que | `!x` - Not x (logical NOT) |
 | `-` Sustracción / resta | `>` Mayor que | `x & y` OR `x AND y` - (logical AND) |
 | `*` Multiplicación | `<=` Menor o igual que | `x && y` - identico |
@@ -824,7 +824,7 @@ En este caso, `length()` devuelve `1` porque la secuencia es un vector con un so
 **Importante:** Cuando trabajamos con secuencias biológicas almacenadas como texto, utilizamos `nchar()` para conocer su longitud en nucleótidos. Si queremos saber cuántas secuencias tenemos almacenadas en un vector, utilizamos `length()`.
 
 | **Estructura** | **¿Para qué sirve?** | **Ejemplo de aplicación** |
-|:----------------------:|:----------------------:|:----------------------:|
+|:--:|:--:|:--:|
 | `if` / `else` | Elegir entre alternativas a partir de una condición única. | Verificar si un conteo es válido. |
 | `ifelse()` | Clasificar elementos de un vector. | Etiquetar conteos positivos y ceros. |
 | `for` | Recorrer una colección de elementos. | Calcular la longitud de varias secuencias. |
@@ -1291,7 +1291,7 @@ readLines(archivo_blast, n = 5)
 En el archivo de práctica verás una primera línea con nombres de columnas y, después, registros. Los campos están separados por **tabulaciones** (`\t`), no por comas.
 
 | **Extensión habitual** | **Contenido frecuente** | **Separador o estructura** |
-|:----------------------:|:----------------------:|:----------------------:|
+|:--:|:--:|:--:|
 | `.csv` | Tabla | Comas, aunque depende de cómo se exportó |
 | `.tsv` | Tabla | Tabulaciones |
 | `.txt` | Texto o tabla | Depende del archivo |
@@ -1629,7 +1629,7 @@ anyDuplicated(blast_na$query_id)
 
 Evita borrar filas, reemplazar `NA` por cero o convertir columnas indiscriminadamente. Primero revisa la documentación del archivo y qué representa cada valor.
 
-##  Una mirada breve a FASTA desde R
+## Una mirada breve a FASTA desde R
 
 FASTA es un formato de texto utilizado para almacenar secuencias. Aquí **no construiremos un analizador completo de FASTA** ni utilizaremos paquetes especializados: solo aprovecharemos funciones de texto para reconocer su estructura.
 
@@ -1673,20 +1673,13 @@ Al finalizar podrás:
 
 5.  Guardar tablas transformadas sin sobrescribir los datos originales.
 
-##  Archivos y preparación
+## Archivos y preparación
 
 Descarga los datos nuevos y descomprímelos [datos_sesion_03_dplyr.zip](https://github.com/CursosENESJuriquilla/Intro_to_R_Bioinfo_2027-1/raw/refs/heads/main/data/datos_sesion_03_dplyr.zip).
 
 Utilizaremos `resultados_blast.tsv` de la sesión 2 y un archivo adicional `conteos_genes.csv`. Organiza las carpetas así:
 
-mi_proyecto/
-├── mi_proyecto.Rproj
-├── data_raw/
-│ ├── datos_sesion_02_blast/
-│ │ └── resultados_blast.tsv
-│ └── datos_sesion_03/
-│ └── conteos_genes.csv
-└── results/
+mi_proyecto/ ├── mi_proyecto.Rproj ├── data_raw/ │ ├── datos_sesion_02_blast/ │ │ └── resultados_blast.tsv │ └── datos_sesion_03/ │ └── conteos_genes.csv └── results/
 
 La instalación de paquetes se realiza una sola vez en cada equipo; `library()` se utiliza en las sesiones en que los necesitemos.
 
@@ -1725,7 +1718,7 @@ La función `glimpse()` permite inspeccionar rápidamente la estructura de un co
 A diferencia de `head()`, que presenta las primeras filas en forma de tabla, `glimpse()` organiza la información por columnas, lo que facilita revisar conjuntos de datos con muchas variables.
 
 | **Función** | **¿Qué muestra?** |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|:--:|:--:|
 | `head()` | Las primeras 6 filas del conjunto de datos, en forma de tabla. |
 | `glimpse()` | El número de filas y columnas, los nombres de las variables, sus tipos de datos y algunos valores. |
 | `str()` | La estructura interna del objeto en R, incluyendo tipos de datos y una vista de su contenido. |
