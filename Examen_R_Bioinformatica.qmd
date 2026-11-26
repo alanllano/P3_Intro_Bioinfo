@@ -1,0 +1,234 @@
+---
+title: "Examen final de Introducción a R - Versión B"
+subtitle: "Bioinformática I — Versión B"
+author: "Alan F. Llano Aviles"
+lang: es
+format:
+  html:
+    toc: true
+    code-fold: true
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+---
+
+## Importación y exploración
+
+```{r}
+#| label: setup
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+```
+
+```{r}
+#| label: importacion
+ruta_conteos <- "datos_B/conteos_filo_miel_bacterias.tsv"
+ruta_metadata <- "datos_B/metadata_miel_examen.csv"
+
+stopifnot(file.exists(ruta_conteos), file.exists(ruta_metadata))
+
+conteos_miel <- read_tsv(ruta_conteos, show_col_types = FALSE)
+metadata_miel <- read_csv(ruta_metadata, na = c("", "NA"), show_col_types = FALSE)
+```
+
+```{r}
+#| label: dimensiones
+cat("Dimensiones de conteos_miel (filas, columnas):", dim(conteos_miel), "\n")
+cat("Dimensiones de metadata_miel (filas, columnas):", dim(metadata_miel), "\n")
+```
+
+```{r}
+#| label: table muestras por especie
+#| tbl-cap: "Número de muestras por especie de abeja sin aguijón."
+
+muestras_por_especie <- metadata_miel %>%
+  count(species, name = "numero_muestras", sort = TRUE)
+
+kable(
+  muestras_por_especie,
+  col.names = c("Especie de abeja", "Número de muestras")
+)
+```
+
+```{r}
+#| label: valores-faltantes
+anyNA(metadata_miel)
+colSums(is.na(metadata_miel))
+```
+
+## Integración y abundancia relativa (20 puntos)
+
+```{r}
+
+#| label: verificacion
+
+# Comprobar que cada sample_id en metadata
+metadata_miel %>%
+  count(sample_id) %>%
+  filter(n > 1)
+
+# Comprobar que no hay muestras sin correspondencia
+conteos_miel %>%
+  anti_join(metadata_miel, by = "sample_id") %>%
+  distinct(sample_id)
+```
+
+```{r}
+#| label: integracion y abundancia
+
+# Integramos conteos com metadatos
+datos_miel <- conteos_miel %>%
+  left_join(metadata_miel, by = "sample_id")
+
+# Calculamos abundancia relativa dentro de una cada muestra 
+abundancias_miel <- datos_miel %>%
+  group_by(sample_id) %>%
+  mutate(abundancia_relativa = conteo / sum(conteo)) %>%
+  ungroup()
+
+# Revisar las primeras filas del resultado
+abundancias_miel %>%
+  select(sample_id, species, filo, conteo, abundancia_relativa) %>%
+  head(8)#primeras 4
+```
+
+```{r}
+#| label: comprobacion abundancias
+
+abundancias_miel %>%
+  group_by(sample_id) %>%
+  summarise(comprobasion_abundancia = sum(abundancia_relativa), .groups = "drop")
+```
+
+## Figura 1: los 10 filos más abundantes (25 puntos)
+
+```{r}
+#| label: fig-top10-filos
+#| fig-cap: "Los 10 filos bacterianos mas abundantes en mieles."
+#| fig-width: 9
+#| fig-height: 7
+
+top10_filos <- abundancias_miel %>%
+  group_by(filo) %>%
+  summarise(
+    abundancia_promedio = mean(abundancia_relativa),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(abundancia_promedio)) %>%
+  slice_head(n = 10)
+
+# Tabla resumen
+kable(
+  top10_filos %>% mutate(porcentaje = abundancia_promedio * 100),
+  col.names = c("Filo", "Abundancia relativa promedio", "Porcentaje (%)"),
+  digits = 4
+)
+
+# Gráfica de barras horizontales ordenadas de mayor a menor
+p_fig1 <- ggplot(
+  top10_filos,
+  aes(x = reorder(filo, abundancia_promedio), y = abundancia_promedio)
+) +
+  geom_col(fill = "#836FFF") +
+  coord_flip() +
+  scale_y_continuous(labels = function(x) paste0(round(100 * x, 1), "%")) +
+  labs(
+    title = "Los 10 filos bacterianos más abundantes en mieles",
+    x = "Filo",
+    y = "Abundancia relativa promedio"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold", hjust = 0.05)
+  )
+
+p_fig1
+```
+
+## Figura 2: composición bacteriana por muestra
+
+```{r}
+#| label: Composición bacteriana por muestra
+#| fig-cap: "Composición bacteriana por muestra, separada por especie de abeja."
+#| fig-width: 13
+#| fig-height: 10
+
+# Agrupamos de filos < 5 % dentro de cada muestra
+filos_5 <- abundancias_miel %>%
+  mutate(
+    taxon_final = if_else(
+      abundancia_relativa < 0.05,
+      "Filos < 5%",
+      filo
+    )
+  ) %>%
+  group_by(sample_id, species, taxon_final) %>%
+  summarise(
+    abundancia_relativa = sum(abundancia_relativa),
+    .groups = "drop"
+  )
+
+# Verificar que cada barra suma 1, osea 100%
+comprobacion_fig2 <- filos_5 %>%
+  group_by(sample_id) %>%
+  summarise(suma = sum(abundancia_relativa), 
+            .groups = "drop")
+stopifnot(all(abs(comprobacion_fig2$suma - 1) < 1e-8))
+
+# Orden de categorías para que "Filos < 5%" aparezca al fondo al final
+orden_filos <- c(
+  sort(setdiff(unique(filos_5$taxon_final), "Filos < 5%")),
+  "Filos < 5%"
+)
+
+# Paleta 
+phylum_colors_rel <- c(
+  "Bacillota" = "#5D91BD",
+  "Pseudomonadota" = "#999999",
+  "Filos < 5%" = "#F9A34B"
+)
+
+# Gráfica de barras apiladas con facetas por especie
+p_fig2 <- ggplot(
+  filos_5,
+  aes(x = sample_id, 
+      y = abundancia_relativa, 
+      fill = taxon_final)
+) +
+  geom_col(width = 0.85) +
+  facet_wrap(~ species, scales = "free_x") +
+  scale_fill_manual(
+    values = phylum_colors_rel,
+    breaks = orden_filos
+  ) +
+  scale_y_continuous(labels = function(x) paste0(round(100 * x), "%")) +
+  labs(
+    title = "Composición bacteriana por muestra y la especie de abeja",
+    x = "Muestra",
+    y = "Abundancia relativa en porcentaje",
+    fill = "Filo"
+  ) +
+  theme_minimal(base_size = 22) +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 12),
+    axis.title = element_text(face = "bold", size = 22),
+    strip.text = element_text(face = "italic", size = 22),
+    plot.title = element_text(face = "bold", hjust = 0.5),#centrado
+    legend.position = "bottom"
+  )
+
+p_fig2
+```
+
+## Interpretación 
+
+1.  ¿Cuál es el filo con mayor abundancia relativa promedio?
+
+    El filo con mayor abundancia relativa en mieles segun la figura 1 es *Bacillota* con un promedio \~85%*,* seguido de *Pseudomonadota* con \~11%*.*
+
+2.  ¿Qué diferencias o similitudes observas en la composición de las muestras de las dos especies de abejas? En ambas especies de abeja podemos encontrar los filos de Bacillota (en mayor cantidad) y de Pseudomonadota (en menor cantidad) que ambas concentra la mayoria de la abundacia relativa de las muestras. La diferencia principal es que en algunas muestras en *Scaptotrigona* (como Scapto_92) la *Pseudomonadota* tiene mayor presencia en la abundancia (aún siendo la de menor abundancia entre *Bacillota* y *Pseudomonaota*) a diferencia que en *Melipona beecheii* que la presencia de *Pseudomonadota* es considerablemente menor y con menos variabilidad.
