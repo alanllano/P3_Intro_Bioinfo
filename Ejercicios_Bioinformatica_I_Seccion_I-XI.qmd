@@ -15,6 +15,8 @@ execute:
 
 # Ejercicios
 
+# 3. Objetos y estructuras de datos en R \## Ejercicio 1. Vectores y selección \## Ejercicio 2: Factores \## Ejercicio 3. Elegir estructuras
+
 ## **Ejercicio 1. Vectores y selección**
 
 Crea los vectores `ids <- c("g1", "g2", "g3", "g4", "g5")` y `tam <- c(90, 450, 310, 120, 600)`.
@@ -84,6 +86,8 @@ resultado$genes
 Una matriz en R es una estructura "homogénea", osea todos sus elementos deben ser exactamente del mismo tipo de dato. Si guardas datos mixtos (como nombres de genes o secuencias junto con sus longitudes) en una matriz, R aplica **coerción automática** y convierte todos los números en texto (`character`), lo que arruina su comportamiento numérico.
 
 ------------------------------------------------------------------------
+
+# 4. Estructuras de control \## Ejercicio 4. Clasificación de un valor \## Ejercicio 5. Verificación de conteos \## Ejercicio 6. Longitudes de secuencias \## Ejercicio 7. Alcanzar una longitud
 
 ## **Ejercicio 4. Clasificación de un valor**
 
@@ -258,6 +262,18 @@ while (nchar(secuencia) < 8) {
 secuencia
 ```
 
+------------------------------------------------------------------------
+
+# 5. Funciones en R
+
+## Ejercicio 8: Función 1
+
+## Ejercicio 9: Función 2
+
+## Ejercicio 10: Función 3
+
+## 5.6 Actividad Final (Ejercicio 11)
+
 ## Ejercicio 8: Función 1
 
 Escribe una función llamada `empieza_con` que reciba una secuencia y un prefijo, y determine si la secuencia comienza con ese prefijo. Pruébala con "ATGCGT" y los prefijos "ATG" y "TGA".
@@ -371,6 +387,12 @@ secuencias <- c("ATGCGT", "ACNTGA", "GGCCAA", "TTTAAA")
 crear_reporte_secuencias(ids, secuencias)
 ```
 
+------------------------------------------------------------------------
+
+# 6. Scripts, paquetes y proyectos de RStudio
+
+## 6.5 Ejercicio 1 (Ejercicio 12)
+
 ## Ejercicio 12
 
 Considera el siguiente código, guardado en un archivo llamado `revision.R`:
@@ -393,6 +415,22 @@ Cargamos los datos de entrada al inicio del archivo, de dos maneras:
 
 a)  Definimos los vectores directamente en el script.
 b)  Los leemos desde un archivo externo como un .csv o .tsv del proyecto, incluyendo su ruta.
+
+------------------------------------------------------------------------
+
+# 7. Importación y exploración de datos bioinformáticos en R
+
+## 7.3.2 Ejercicio 1: Reconocer un archivo antes de importarlo (Ejercicio 13)
+
+## 7.4 Ejercicio 2: Elegir la función adecuada (Ejercicio 14)
+
+## 7.5 Ejercicio 3: Explorar resultados tipo BLAST (Ejercicio 15)
+
+## 7.6 Ejercicio 4: Detectar un problema de lectura (Ejercicio 16)
+
+## 7.7 Ejercicio 5: Reconocer secuencias en FASTA (Ejercicio 17)
+
+## 7.8 Práctica Final - Ejercicio 6: De los archivos a una descripción de los datos (Ejercicio 18)
 
 ## Ejercicio 13: Reconocer un archivo antes de importarlo
 
@@ -577,7 +615,15 @@ colSums(is.na(metadata))
 # 3. De los 20 registros de BLAST, solo 5 tienen pident >= 90.
 ```
 
-## 8.10.1 Ejercicio 19. Identificación de genes candidatos
+------------------------------------------------------------------------
+
+# 8. Manipulación y transformación de datos bioinformáticos con dplyr y tidyr
+
+## 8.10.1 Ejercicio 19. Identificación de genes candidatos (Ejercicio 19)
+
+## 8.10.2 Ejercicio 20. ¿Qué funciones biológicas predominan? (Ejercicio 20)
+
+## Ejercicio 19. Identificación de genes candidatos
 
 Queremos explorar qué genes podrían estar relacionados con la respuesta bacteriana al estrés.
 
@@ -680,6 +726,12 @@ Pregunta de interpretación: ¿La categoría funcional más frecuente entre esto
 
 No, si vemos funciones como Metabolismo energético o Replicación y reparación que son las más frecuentes en el top 15, con 3 genes cada una, requieren muchas copias de ARNm de forma constante, mientras que genes igual de vitales como los de Regulación transcripcional o Respuesta al estrés cumplen su función con muchas menos lecturas.
 
+------------------------------------------------------------------------
+
+# 9. Integración de datos y automatización de análisis en R
+
+## 9.8 Actividad breve: ¿la tabla está lista para graficarse?
+
 ## Ejercicio 21
 
 **Ejercicio**
@@ -716,7 +768,17 @@ generos_5 %>%
   summarise(total = sum(abundancia_relativa), .groups = "drop")
 ```
 
-###  Ejercicio 22:
+### 
+
+------------------------------------------------------------------------
+
+# cd \~/P3_Intro_Bioinfo quarto render Ejercicios_Bioinformatica_I_Seccion_I-XI.qmd10. Construcción y exploración visual de datos bioinformáticos con ggplot2
+
+## 10.12.1 Ejercicio 22
+
+## 10.12.2 Ejercicio 23
+
+### Ejercicio 22:
 
 Utilizando `generos_5` y `metadata_riz`:
 
