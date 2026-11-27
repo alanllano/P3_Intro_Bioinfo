@@ -15,7 +15,11 @@ execute:
 
 # Ejercicios
 
-# 3. Objetos y estructuras de datos en R \## Ejercicio 1. Vectores y selección \## Ejercicio 2: Factores \## Ejercicio 3. Elegir estructuras
+# 3. Objetos y estructuras de datos en R 
+
+# ## Ejercicio 1. Vectores y selección 
+## Ejercicio 2: Factores 
+## Ejercicio 3. Elegir estructuras
 
 ## **Ejercicio 1. Vectores y selección**
 
@@ -87,7 +91,11 @@ Una matriz en R es una estructura "homogénea", osea todos sus elementos deben s
 
 ------------------------------------------------------------------------
 
-# 4. Estructuras de control \## Ejercicio 4. Clasificación de un valor \## Ejercicio 5. Verificación de conteos \## Ejercicio 6. Longitudes de secuencias \## Ejercicio 7. Alcanzar una longitud
+# 4. Estructuras de control 
+## Ejercicio 4. Clasificación de un valor 
+## Ejercicio 5. Verificación de conteos 
+## Ejercicio 6. Longitudes de secuencias 
+## Ejercicio 7. Alcanzar una longitud
 
 ## **Ejercicio 4. Clasificación de un valor**
 
@@ -772,7 +780,7 @@ generos_5 %>%
 
 ------------------------------------------------------------------------
 
-# cd \~/P3_Intro_Bioinfo quarto render Ejercicios_Bioinformatica_I_Seccion_I-XI.qmd10. Construcción y exploración visual de datos bioinformáticos con ggplot2
+# Construcción y exploración visual de datos bioinformáticos con ggplot2
 
 ## 10.12.1 Ejercicio 22
 
